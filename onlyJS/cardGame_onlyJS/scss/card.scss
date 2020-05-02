@@ -1,0 +1,178 @@
+*,*:before,*:after {
+    box-sizing: border-box;
+}
+html {
+    font-size: 10px;
+}
+body {
+    font-family: "Roboto", "Noto Sans KR", sans-serif;
+    font-size: 1.6rem;
+    color: #333;
+}
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+#game {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+    .gameBg {
+        position: fixed;
+        z-index: -1;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        img {
+            width: 100%;
+        }
+    }
+    #logo {
+        width: 100%;
+        text-align: center;
+        margin-top: 3%;
+        img {
+            width: 50%;
+        }
+    }
+    #cardPlace {
+        .btns {
+            position: absolute;
+            bottom: 5%;
+            right: 23%;
+            z-index: 1;
+            button {
+                border: none;
+                outline: none;
+                background-color: transparent;
+                img {
+                    width: 80px;
+                }
+            }
+        }
+        .info {
+            position: absolute;
+            bottom: 5%;
+            left: 5%;
+            img {
+                width: 25%;
+            }
+        }
+        .card {
+            position: absolute;
+            bottom: 5%;;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 750px;
+            height: 650px;
+            .cardBg {
+                position: absolute;
+                z-index: -1;
+                text-align: center;
+                width: 100%;
+                height: 100%;
+                img {
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+            ul {
+                margin-top: 5px;
+                width: 100%;
+                height: 100%;
+                padding: 15px 20px;
+            }
+            li {
+                width: 24%;
+                float: left;
+                background-color: rgb(255, 216, 158);
+                border-radius: 10px;
+                margin: 0.5% 0.5%;
+                .back {
+                    text-align: center;
+                    padding-top: 7px;
+                    display: inline-block;
+                    width: 100%;
+                    img {
+                        opacity: 0;
+                        width: 80%;
+                        transition: 2s ease;
+                    }
+                }
+                &.click {
+                    .back {
+                        img {
+                            opacity: 1;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    #gameStart {
+        position: fixed;
+        display: block;
+        z-index: 2;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background-color: rgba(0,0,0,0.7);
+        img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            width: 30%;
+        }
+        &.start {
+            display: none;
+        }
+        
+    }
+    #gameWin {
+        position: fixed;
+        display: none;
+        z-index: 2;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background-color: rgba(0,0,0,0.7);
+        img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            width: 30%;
+        }
+        &.win {
+            display: block;
+        }   
+    }
+    &.click {
+        #cardPlace {
+            .card {
+                li {
+                    .back {
+                        img {
+                            animation: changeCard 5s;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@keyframes changeCard {
+    0%{
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
