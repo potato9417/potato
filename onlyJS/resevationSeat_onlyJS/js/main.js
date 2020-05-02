@@ -17,7 +17,6 @@ const xAxis = 16,
     checkMale = document.getElementById("checkMale");
 
 // console.log(male);
-    
 let seatArr = [],
     price = 0,
     clickNum = 0,
@@ -97,7 +96,7 @@ function seatSetting(){
                                 if(seats[i].classList.contains("click")){
                                     // 좌석을 분류해줌
                                     arrBox.push(seatArr[i]);
-                                    seatArr.splice(i,1,{gen:showGender,sep:showSeparate})
+                                    seatArr.splice(i,1,{id:i,gen:showGender,sep:showSeparate})
                                     // 선택좌석 카운트
                                     clickNum++;
                                     seats[i].index=i;
@@ -125,9 +124,6 @@ function seatSetting(){
                                 console.log(selectNum);
                                 selectNum.innerHTML=clickNum;
                                 selectPrice.innerHTML=price;
-
-
-                            
                             })
                         }
                     }
@@ -197,18 +193,113 @@ function clickDisabled(){
     }
 }
 
+
 // checkbox 클릭 이벤트(전체선택)
 function clickCheckMale(){
-    console.log(seatArr);
-    let maleArr = seatArr.filter(function(el){
-        return new RegExp("male").test(el.gender);
+    // https://velog.io/@decody/map-%EC%A0%95%EB%A6%AC filter find 비교
+    // find 단 하나의 요소만 반환
+    // let maleArr = seatArr.find(function(item){
+    //     return item.gen === "male";
+    // })
+    // console.log(maleArr)
+    const seats = document.querySelectorAll("#lines p");
+    // filter 요소를 걸러내어 배열
+    // male이 포함된 배열찾기
+    let maleArr = seatArr.filter(function(item){
+        return item.gen === "male";
     })
-        
+    for(let i=0;i<maleArr.length;i++){
+        checkID = maleArr[i].id;
+        console.log(checkID)
+        for(let j=0;j<seats.length;j++){
+            if(seats[j].index===checkID){
+                seats[j].classList.toggle("click");
+            }
+        }
+    }
+    
+   
     console.log(maleArr)
+    // let findArr = arrBox.find(function(item){
+    //     return item.id === inx;
+    // })
     // users.filter(it => new RegExp('oli', "i").test(it.name));
 }
-
-
+function clickCheckFemale(){
+    const seats = document.querySelectorAll("#lines p");
+    let femaleArr = seatArr.filter(function(item){
+        return item.gen === "female";
+    })
+    for(let i=0;i<femaleArr.length;i++){
+        checkID = femaleArr[i].id;
+        for(let j=0;j<seats.length;j++){
+            if(seats[j].index===checkID){
+                seats[j].classList.toggle("click");
+            }
+        }
+    }
+    console.log(femaleArr)
+}
+function clickCheckAdolescent(){
+    const seats = document.querySelectorAll("#lines p");
+    let adolescentArr = seatArr.filter(function(item){
+        return item.sep === "adolescent";
+    })
+    for(let i=0;i<adolescentArr.length;i++){
+        checkID = adolescentArr[i].id;
+        for(let j=0;j<seats.length;j++){
+            if(seats[j].index===checkID){
+                seats[j].classList.toggle("click");
+            }
+        }
+    }
+    console.log(adolescentArr)
+}
+function clickCheckAdult(){
+    const seats = document.querySelectorAll("#lines p");
+    let adultArr = seatArr.filter(function(item){
+        return item.sep === "adult";
+    })
+    for(let i=0;i<adultArr.length;i++){
+        checkID = adultArr[i].id;
+        for(let j=0;j<seats.length;j++){
+            if(seats[j].index===checkID){
+                seats[j].classList.toggle("click");
+            }
+        }
+    }
+    console.log(adultArr)
+}
+function clickCheckNational(){
+    const seats = document.querySelectorAll("#lines p");
+    let nationalArr = seatArr.filter(function(item){
+        return item.sep === "national";
+    })
+    for(let i=0;i<nationalArr.length;i++){
+        checkID = nationalArr[i].id;
+        for(let j=0;j<seats.length;j++){
+            if(seats[j].index===checkID){
+                seats[j].classList.toggle("click");
+            }
+        }
+    }
+    console.log(nationalArr)
+}
+function clickCheckDisabled(){
+    const seats = document.querySelectorAll("#lines p");
+    let disabledArr = seatArr.filter(function(item){
+        return item.sep === "disabled";
+    })
+    for(let i=0;i<disabledArr.length;i++){
+        checkID = disabledArr[i].id;
+        for(let j=0;j<seats.length;j++){
+            if(seats[j].index===checkID){
+                seats[j].classList.toggle("click");
+            }
+        }
+    }
+    console.log(disabledArr)
+}
 
 seatSetting()
 
