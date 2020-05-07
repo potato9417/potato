@@ -89,7 +89,6 @@ function makeArr(){
                         // console.log(seats[m.id],"==",m.id)
                         
                         // console.log(makeSeat[m.id],"dhdhhdh");
-                        makeSeat.
                         makeSeat.splice(m.id,1,{id:m.id,gen:showGender,sep:showSeparate})
                         // makeSeat[m.id].push({id:m.id,gen:showGender,sep:showSeparate})
                         console.log(makeSeat)
