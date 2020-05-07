@@ -80,47 +80,21 @@ function makeArr(){
                         s.classList.add("show");
                     }
                 })
-                console.log(makeSeat)
-                for(let i=0;i<makeSeat.length;i++){
-                    if(seats[i].classList.contains("click")){
+                // console.log(makeSeat)
+                
+                makeSeat.forEach(function(m){
+                    // console.log(m.id)
+                    if(seats[m.id].classList.contains("click")){
                         // console.log("this")
                         // console.log(seats[m.id],"==",m.id)
                         
                         // console.log(makeSeat[m.id],"dhdhhdh");
-                        
-                        makeSeat.splice(i,1,{id:i,gen:showGender,sep:showSeparate})
+                        makeSeat.
+                        makeSeat.splice(m.id,1,{id:m.id,gen:showGender,sep:showSeparate})
                         // makeSeat[m.id].push({id:m.id,gen:showGender,sep:showSeparate})
                         console.log(makeSeat)
                     }
-                }
-
-                // if(seats[m.id].classList.contains("click")){
-                //     // console.log("this")
-                //     // console.log(seats[m.id],"==",m.id)
-                    
-                //     // console.log(makeSeat[m.id],"dhdhhdh");
-                    
-                //     makeSeat.splice(m.id,1,{id:m.id,gen:showGender,sep:showSeparate})
-                //     // makeSeat[m.id].push({id:m.id,gen:showGender,sep:showSeparate})
-                //     console.log(makeSeat)
-                // }
-
-
-                // console.log(makeSeat)
-                // makeSeat.forEach(function(m){
-                //     // console.log(m.id)
-                //     if(seats[m.id].classList.contains("click")){
-                //         // console.log("this")
-                //         // console.log(seats[m.id],"==",m.id)
-                        
-                //         // console.log(makeSeat[m.id],"dhdhhdh");
-                        
-                //         makeSeat.splice(m.id,1,{id:m.id,gen:showGender,sep:showSeparate})
-                //         // makeSeat[m.id].push({id:m.id,gen:showGender,sep:showSeparate})
-                //         console.log(makeSeat)
-                //     }
-                // })
-                
+                })
             }
             else{
                 clickNum--;
