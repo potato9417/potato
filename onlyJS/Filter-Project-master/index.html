@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Starter Template</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/index.css">
+    <script src="js/index.js" defer></script>
+</head>
+<body>
+    <header id="header">
+        <h1 id="logo">Our <strong>Store</strong></h1>
+    </header>
+    <section id="category">
+        <ul>
+            <li><p class="depth01" id= "all">ALL</p></li>
+            <li><p class="depth01" id= "cakes">CAKES</p></li>
+            <li><p class="depth01" id= "cupcakes">CUPCAKES</p></li>
+            <li><p class="depth01" id= "sweets">SWEETS</p></li>
+            <li><p class="depth01" id= "doughnuts">DOUGHNUTS</p></li>
+        </ul>
+    </section>
+    <section id="search">
+        <div class="iconBox">
+            <i class="xi-search"></i>
+        </div>
+            <input type="text" placeholder="Search Item.." id="inputItem" class="searchBox" onkeyup="searchItemEvent()">
+        </div>
+    </section>
+    <section id="list">
+        <ul>
+            <li class="cakes">
+                <div class="imgBox">
+                    <div class="imginner">
+                        <img src="img/cake-2.jpeg" alt="">
+                        <div class="cart"><i class="xi-cart"></i></div>
+                    </div>
+                </div>
+                <div class="textBox">
+                    <p class="name">cakeItem</p>
+                    <p class="price">20$</p>
+                </div>
+            </li>
+            <li class="sweets">
+                <div class="imgBox">
+                    <div class="imginner">
+                        <img src="img/sweets-1.jpeg" alt="">
+                        <div class="cart"><i class="xi-cart"></i></div>
+                    </div>
+                </div>
+                <div class="textBox">
+                    <p class="name">sweetItem</p>
+                    <p class="price">5$</p>
+                </div>
+            </li>
+            <li class="doughnuts">
+                <div class="imgBox">
+                    <div class="imginner">
+                        <img src="img/doughnut-1.jpeg" alt="">
+                        <div class="cart"><i class="xi-cart"></i></div>
+                    </div>
+                </div>
+                <div class="textBox">
+                    <p class="name">doughnutItem</p>
+                    <p class="price">10$</p>
+                </div>
+            </li>
+            <li class="cupcakes">
+                <div class="imgBox">
+                    <div class="imginner">
+                        <img src="img/cupcake-2.jpeg" alt="">
+                        <div class="cart"><i class="xi-cart"></i></div>
+                    </div>
+                </div>
+                <div class="textBox">
+                    <p class="name">cupcakeItem</p>
+                    <p class="price">15$</p>
+                </div>
+            </li>
+            <li class="sweets">
+                <div class="imgBox">
+                    <div class="imginner">
+                        <img src="img/sweets-2.jpeg" alt="">
+                        <div class="cart"><i class="xi-cart"></i></div>
+                    </div>
+                </div>
+                <div class="textBox">
+                    <p class="name">sweetItem</p>
+                    <p class="price">5$</p>
+                </div>
+            </li>
+            <li class="cakes">
+                <div class="imgBox">
+                    <div class="imginner">
+                        <img src="img/cake-3.jpeg" alt="">
+                        <div class="cart"><i class="xi-cart"></i></div>
+                    </div>
+                </div>
+                <div class="textBox">
+                    <p class="name">cakeItem</p>
+                    <p class="price">20$</p>
+                </div>
+            </li>
+            <li class="doughnuts">
+                <div class="imgBox">
+                    <div class="imginner">
+                        <img src="img/doughnut-3.jpeg" alt="">
+                        <div class="cart"><i class="xi-cart"></i></div>
+                    </div>
+                </div>
+                <div class="textBox">
+                    <p class="name">doughnutItem</p>
+                    <p class="price">10$</p>
+                </div>
+            </li>
+            <li class="cupcakes">
+                <div class="imgBox">
+                    <div class="imginner">
+                        <img src="img/cupcake-3.jpeg" alt="">
+                        <div class="cart"><i class="xi-cart"></i></div>
+                    </div>
+                </div>
+                <div class="textBox">
+                    <p class="name">cupcakeItem</p>
+                    <p class="price">15$</p>
+                </div>
+            </li>
+            <li class="sweets">
+                <div class="imgBox">
+                    <div class="imginner">
+                        <img src="img/sweets-3.jpeg" alt="">
+                        <div class="cart"><i class="xi-cart"></i></div>
+                    </div>
+                </div>
+                <div class="textBox">
+                    <p class="name">sweetItem</p>
+                    <p class="price">5$</p>
+                </div>
+            </li>
+            <li class="cakes">
+                <div class="imgBox">
+                    <div class="imginner">
+                        <img src="img/cake-1.jpeg" alt="">
+                        <div class="cart"><i class="xi-cart"></i></div>
+                    </div>
+                </div>
+                <div class="textBox">
+                    <p class="name">cakeItem</p>
+                    <p class="price">20$</p>
+                </div>
+            </li>
+            <li class="cupcakes">
+                <div class="imgBox">
+                    <div class="imginner">
+                        <img src="img/cupcake-1.jpeg" alt="">
+                        <div class="cart"><i class="xi-cart"></i></div>
+                    </div>
+                </div>
+                <div class="textBox">
+                    <p class="name">cupcakeItem</p>
+                    <p class="price">15$</p>
+                </div>
+            </li>
+            <li class="doughnuts">
+                <div class="imgBox">
+                    <div class="imginner">
+                        <img src="img/doughnut-2.jpeg" alt="">
+                        <div class="cart"><i class="xi-cart"></i></div>
+                    </div>
+                </div>
+                <div class="textBox">
+                    <p class="name">doughnutItem</p>
+                    <p class="price">10$</p>
+                </div>
+            </li>
+        </ul>
+    </section>
+</body>
+</html>
