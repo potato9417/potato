@@ -8,6 +8,7 @@ const  categoryAll = document.getElementById("all"),
     itemList = document.querySelectorAll("#list ul li"),
     inputItem = document.getElementById("inputItem");
 
+let num = 0;
 
 
 
@@ -72,11 +73,18 @@ function searchItemEvent(){
         let splitStringArr = splitArr.toString();
         let splitStringInputArr = splitInputArr.toString();
 
-        console.log(splitArr,"==",splitStringInputArr)
+        // 지금 입력한 단어
+        let inputLetter = splitInputArr[num];
+
+        // 정규식.. 웨않뒈?
+        const regex = /[^\w\s]/splitInputArr[num];
+        
+        console.log(splitInputArr[num])
+        // console.log(splitStringArr,"==",splitStringInputArr)
 
         // 입력한 글자와 이름 앞글자가 같을 경우 두번쨰글자부터 인식못함..
         if(splitArr.lastIndexOf(splitStringInputArr)){
-            console.log("hi")
+            console.log("입력인식")
             e.classList.add("hidden")
         };
 
@@ -89,6 +97,7 @@ function searchItemEvent(){
         
     })
     // if(inputItem.value===
+    num++
 }
 
 
