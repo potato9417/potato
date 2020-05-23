@@ -1,0 +1,63 @@
+
+@media screen and (max-width:1550px){
+    h1 {
+        font-size: 8rem;
+    }
+    body .container .dock input {
+        width: 250px;
+        height: 40px;
+        line-height: 45px;
+        font-size: 3rem;
+    }
+    body .container .dock input::placeholder{
+        font-size: 2rem;
+    }
+    body .container .nameDock .showing {
+        display: block;
+        font-size: 3rem;
+    }
+    body .container .todoDock {
+        position: absolute;
+        top: 67%;
+    }
+    body .container .todoDock ul {
+        right: -150%;
+        width: 250px;
+        font-size: 1.5rem;
+    }
+    body .container .todoDock ul li button {
+        font-size: 1.5rem;
+    }
+}
+@media screen and (max-width:1010px){
+    h1 {
+        font-size: 5rem;
+    }
+    body .container .dock input {
+        width: 180px;
+        height: 35px;
+        line-height: 40px;
+        font-size: 2rem;
+    }
+    body .container .dock input::placeholder{
+        font-size: 1.6rem;
+    }
+    body .container .nameDock {
+        top: 53%;
+    }
+    body .container .nameDock .showing {
+        display: block;
+        font-size: 2rem;
+    }
+    body .container .todoDock {
+        top: 60%;
+    }
+    body .container .todoDock ul {
+        right: -130%;
+        width: 150px;
+        font-size: 1.4rem;
+    }
+    body .container .todoDock ul li button {
+        font-size: 1.4rem;
+    }
+}
