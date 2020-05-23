@@ -1,0 +1,551 @@
+
+
+#mainVisual {
+    position: relative;
+}
+
+#mainVisual .btnScroll {
+    position: absolute;
+    width:100px;
+    height: 100px;
+    left:50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    bottom: 200px;
+}
+#mainVisual .btnScroll svg {
+    stroke-dasharray: 500;
+    stroke-dashoffset: 500;
+    animation: svgAni 2s ease 1s infinite;
+}
+#mainVisual .btnScroll i {
+    position: absolute;
+    left:50%;
+    top:50%;
+    color:#fff;
+    transform: translate(-50%,-50%);
+}
+#mainVisual li {
+    height: 100vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50% 0;
+}
+#mainVisual .visual01 {
+    background-image: url("../images/main-visual-01.jpg");
+}
+#mainVisual .visual02 {
+    background-image: url("../images/main-visual-02.jpg");
+}
+#mainVisual .visual03 {
+    background-image: url("../images/main-visual-03.jpg");
+}
+
+
+#mainVisual .pagination {
+    position: absolute;
+    z-index: 4;
+    top:50%;
+    right:50px;
+    bottom:auto;
+    left:auto;
+    width:auto;
+    transform: translateY(-50%);
+    text-align: center;
+}
+#mainVisual .pagination .bullets {
+}
+#mainVisual .pagination .swiper-pagination-bullet {
+    display: block;
+    margin: 10px;
+    width:20px;
+    height: 20px;
+    opacity: 1;
+    border:3px solid #fff;
+    background-color: transparent;
+    border-radius: 100px;
+    outline: none;
+    transition: 0.25s ease;
+}
+#mainVisual .pagination .swiper-pagination-bullet-active {
+    height:80px;
+    background-color: #fff;
+}
+#mainVisual .pagination .btns {
+    display: inline-block;
+}
+#mainVisual .pagination .btns i {
+    font-size: 24px;
+    color:#fff;
+}
+#mainVisual .pagination .btns .btnPlay {
+    display: none;
+}
+
+#mainVisual .txtBox {
+    width:100%;
+    position: absolute;
+    text-align: center;
+    color:#fff;
+    top:50%;
+    font-size: 24px;
+}
+#mainVisual .txtBox .main {
+    font-size: 64px;
+    font-weight: 200;
+}
+
+#business {
+
+}
+
+.container {
+    width:1200px;
+    margin: auto;
+    position: relative;
+}
+
+#mainContents {
+    background-color: #fff;
+    max-width:1900px;
+    margin: auto;
+}
+#mainContents h2 {
+    font-size: 40px;
+    font-weight: 200;
+}
+#mainContents h3 span{
+    font-size: 24px;
+}
+#mainContents h3 strong {
+    font-size: 70px;
+    display: block;
+    font-weight: 200;
+}
+
+#mainContents .btnMore {
+    display: inline-block;
+    padding:20px 30px;
+    border: 1px solid #000;
+    margin-top: 50px;
+}
+#mainContents .btnMore.white {
+    border: 1px solid #fff;
+}
+
+#business {
+    
+}
+#business .sectionTitle {
+    padding: 100px 0 50px;
+    
+}
+#business .txtBox {
+    padding:100px 0 0;
+}
+#business .contents01 {
+    position: relative;
+    z-index: 2;
+    
+}
+#business .contents01 .txtBox {
+    float: left;
+    padding-top: 0;
+}
+#business .contents01 video {
+    float: right;
+    margin-top: -300px;
+}
+#business .contents02 {
+    position: relative;
+    z-index: 1;
+}
+#business .contents02 .txtBox {
+    color:#fff;
+    float: right;
+    margin-right: 200px;
+}
+#business .contents02 .imgBox {
+    float: left;
+}
+#business .contents02 .bg {
+    position: absolute;
+    top:-300px;
+    right:0;
+    width:60%;
+    height: 1300px;
+    background: url("../images/main-business-03.jpg") no-repeat 50%;
+    background-size: cover;
+    /* transform: translate(200px,-40%); */
+    z-index: -1;
+}
+#business .contents03 {
+    background: url("../images/business-colorpaste-bg.jpg");
+    background-size: cover;
+    color:#fff;
+    position: relative;
+}
+#business .contents03 .container {
+    height: 700px;
+}
+#business .contents03 .txtBox {
+    padding: 0;
+    position: absolute;
+    top:50%;
+    transform: translateY(-50%);
+}
+
+
+#chemical {
+    padding:100px 0;
+}
+#chemical h2 {
+    text-align: center;
+    font-size: 54px;
+    margin-bottom: 50px;
+}
+#chemical li {
+    width:380px;
+    margin-left:30px;
+}
+#chemical li:nth-child(1) {
+    margin-left: 0;
+}
+#chemical li img {
+    width:100%;
+}
+#chemical li h3 {
+    font-size: 24px;
+    margin: 20px 0;
+    font-weight: 500;
+}
+#about .infoBox {
+    margin-top: -250px;
+}
+#about h2 {
+    text-align: center;
+    font-size: 54px;
+    margin-bottom: 50px;
+}
+#about .gray {
+    padding:100px 0 400px;
+    background-color: #f8f8f8;
+}
+#about li {
+    width:33.33%;
+    text-align: center;
+}
+#about li h3 {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 40px 0 20px;
+}
+#about li svg {
+    stroke-dasharray: 500;
+    stroke-dashoffset: 500;
+    animation: svgAni 3s linear 1s forwards;
+}
+.test {
+    stroke-dasharray: 500;
+    stroke-dashoffset: 500;
+    animation: svgAni 3s linear 1s forwards;
+}
+
+#about .infoBox article {
+    float: left;
+    width:50%;
+}
+
+#about .infoBox .social {
+    background: url("../images/main-corporate.jpg");
+    position: relative;
+}
+#about .infoBox .social a {
+    display: block;
+    height: 730px;
+    position: relative;
+}
+#about .infoBox .social a:before {
+    content: '';
+    display: block;
+    position: absolute;
+    left:30px;
+    right:30px;
+    top:30px;
+    bottom: 30px;
+    border: 1px solid rgba(255,255,255,0.5);
+    transition: 0.25s ease;
+}
+#about .infoBox .social a:hover:before {
+    border-width: 5px;
+}
+#about .infoBox .social .contentsBox {
+    color:#fff;
+    position: absolute;
+    text-align: center;
+    width:100%;
+    top:50%;
+    transform: translateY(-50%);
+}
+#about .infoBox .social .contentsBox .main {
+    display: block;
+    font-size: 55px;
+    font-weight: 200;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    line-height: 1.1;
+}
+#about .infoBox .social .contentsBox i {
+    display: inline-block;
+    border: 1px solid #fff;
+    border-radius: 100px;
+    padding:15px;
+}
+
+#about .infoBox .recruit {
+    background-color: #e7e7e7;
+    position: relative;
+    height: 730px;
+}
+#about .infoBox .recruit h3 {
+    font-size: 55px;
+    font-weight: 200;
+    margin: 150px 0 0 100px;
+}
+#about .infoBox .recruit .man {
+    position: absolute;
+    right:0;
+    bottom: 0;
+}
+#about .infoBox .recruit .contentsBox {
+    position: absolute;
+    background: rgba(255,255,255,0.5);
+    width:100%;
+    height: 340px;
+    bottom: 0;
+    z-index: 2;
+    padding:100px 0 0 100px;
+}
+#about .infoBox .recruit .contentsBox .title {
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+#about .infoBox .recruit .contentsBox .date {
+    margin-top: 10px;
+}
+#about .infoBox .recruit .contentsBox i {
+    display: inline-block;
+    border: 1px solid #999;
+    border-radius: 100px;
+    padding:15px;
+    margin-top: 20px;
+}
+
+#news {
+    padding:100px 0;
+}
+#news h2 {
+    text-align: center;
+}
+#news li a {
+    display: block;
+    border-bottom: 1px solid #d9d9d9;
+    position: relative;
+    padding-left: 130px;
+}
+#news li .date {
+    position: absolute;
+    left:0;
+    top:50%;
+    width:130px;
+    transform: translateY(-50%);
+    text-align: center;
+}
+#news li .date .day {
+    display: block;
+    font-weight: 500;
+    font-size: 48px;
+}
+#news li .contentsBox {
+    padding:50px 100px 50px 0;
+    position: relative;
+}
+#news li .contentsBox .subject {
+    margin-bottom: 10px;
+}
+#news li .contentsBox .subject .notice {
+    display: inline-block;
+    padding:7px 20px;
+    margin-right: 10px;
+    color:var(--main-color);
+    border: 1px solid var(--main-color);
+}
+#news li .contentsBox .subject p {
+    display: inline-block;
+    font-size: 20px;
+    font-weight: 500;
+}
+#news li:hover i {
+    transform: scale(0.8) translateY(-50%);
+}
+#news li i {
+    display: inline-block;
+    border: 1px solid #999;
+    border-radius: 100px;
+    padding:15px;
+    margin-top: 20px;
+    position: absolute;
+    right:10px;
+    top:50%;
+    transform: translateY(-50%);
+    transition: 0.25s ease;
+}
+
+#news .btns {
+    text-align: center;
+    margin-top: 80px;
+}
+#news .btns a {
+    display: inline-block;
+    border: 1px solid #000;
+    padding:15px 25px;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    transition: 0.5s ease;
+}
+#news .btns a:before {
+    content: '';
+    display: block;
+    width:120%;
+    height: 100%;
+    transform: skewX(-30deg);
+    position: absolute;
+    left:-140%;
+    top:0;
+    background-color: #000;
+    z-index: -1;
+    transition: 0.5s ease;
+}
+#news .btns a:hover {
+    color:#fff;
+}
+#news .btns a:hover:before {
+    left:0;
+    transform: skewX(0);
+}
+#stock {
+    padding-bottom: 100px;
+}
+#stock .contentsBox {
+    width:50%;
+    float: left;
+}
+#stock .contentsBox h2 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+#stock .contentsBox .number .stockNum {
+    font-size: 45px;
+    font-weight: 100;
+    color:#ec429a;
+    float: left;
+}
+#stock .contentsBox .number .infoBox {
+    float: right;    margin-top: 15px;
+}
+#stock .stock {
+    padding-right: 50px;
+}
+#stock .ir {
+    padding-left: 50px;    border-left: 1px solid #d9d9d9;
+}
+#stock .ir li {
+    overflow: hidden;    padding: 5px 0;    border-bottom: 1px solid #d9d9d9;
+}
+#stock .ir li a {
+    float: left;
+}
+#stock .ir li .date {
+    float: right;
+}
+
+#location .contentsBox {
+    width:50%;
+    float: left;
+    background-size: cover;
+    background-position: 50%;
+    transition: 0.25s ease;
+}
+#location .contentsBox a {
+    display: block;
+    height: 350px;
+    position: relative;
+    color:#fff;
+    text-align: center;
+}
+#location .contentsBox a:hover:before {
+    opacity: 1;
+}
+#location .contentsBox a:before {
+    content: '';
+    display: block;
+    position: absolute;
+    left:20px;
+    right:20px;
+    top:20px;
+    bottom: 20px;
+    background-color: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.5);
+    box-shadow: 5px 5px 5px rgba(0,0,0,0.1);
+    opacity: 0;
+    transition: 0.5s ease;
+}
+#location .contentsBox a strong {
+    font-size: 32px;
+}
+#location .contentsBox .infoBox {
+    width:100%;
+    position: absolute;
+    top:50%;
+    transform: translateY(-50%);
+}
+#location .office {
+    background-image: url("../images/main-banner-office.jpg");
+} 
+#location .factory {
+    background-image: url("../images/main-banner-factory.jpg");
+} 
+
+@keyframes svgAni {
+    100% {
+        stroke-dashoffset: 0;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* #about li svg {
+    stroke-dasharray: 500;
+    stroke-dashoffset: 500;
+    animation: dash 3s 1s infinite;
+}
+@keyframes dash {
+    100% {
+        stroke-dashoffset: 0;
+    }
+  }
+   */

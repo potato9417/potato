@@ -1,0 +1,37 @@
+body {
+    background-color: #efc7ff;
+}
+#calculator {
+    width: 300px;
+    height: 400px;
+    padding: 20px;
+
+}
+#calculator h1 {
+    font-size: 20px;
+    font-weight: 700;
+    padding-bottom: 20px;
+    color: #8000b3;
+}
+#result {
+    display: block;
+    width: 204px;
+    height: 50px;
+    border: 1px solid #600086;
+    margin-left: 5px;
+    color: #8000b3;
+    font-size: 20px;
+    font-weight: 700;
+    text-align: right;
+    bottom: 0;
+
+}
+#calculator div {
+    padding: 5px;
+}
+#calculator button {
+    color: #8000b3;
+    width: 50px;
+    height: 50px;
+    border: 1px solid #600086;
+}
