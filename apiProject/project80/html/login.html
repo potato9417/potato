@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Project80</title>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://code.jquery.com/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <script src="../js/custom_axios.js"></script>
 </head>
 <body>
     <h2 id="title">로그인</h2>
@@ -16,7 +19,31 @@
     <button id="signUpBtn" onClick="location.href='sign_up.html'">회원가입</button>
 
     <script>
-        
+        const loginBtn = document.getElementById("loginBtn"),
+            loginId = document.getElementById("loginIdInput"),
+            loginPw = document.getElementById("loginPwInput");
+
+        loginBtn.addEventListener("click",()=>{
+            let id = loginId.value,
+                pw = loginPw.value;
+
+            console.log(id,pw)
+            const form = new FormData();
+            form.append("email",id);
+            form.append("password",pw);
+
+            axiosInstance.post("/user",form)
+                .then((res)=>{
+                    if(res.data.code==200){
+                        location.href="./index.html";
+                    }
+                })
+                .catch((error)=>{
+                    console.log(error.response.data.message)
+                })
+
+        })
+
         
 
     </script>
