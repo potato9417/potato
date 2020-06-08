@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project80</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <h2 id="title">회원가입</h2>
+    <form>
+        <p id="signUpId">아이디</p> <input id="signUpIdInput" type="text" placeholder="이메일을 입력해주세요.">
+        <p id="signUpNickName">닉네임</p> <input id="signUpNickNameInput" type="text" placeholder="닉네임을 입력해주세요.">
+        <p id="signUpPw">비밀번호</p> <input id="signUpPwInput" type="text" placeholder="비밀번호를 입력해주세요.">
+        <p id="signUpCheckPw">비밀번호 확인</p> <input id="signUpCheckPwInput" type="text" placeholder="비밀번호를 한번 더 입력해주세요.">
+    </form>
+    <button id="signUpBtn">회원가입</button>
+
+    <script>
+        const signUpBtn = document.getElementById("signUpBtn"),
+            signUpIdInput = document.getElementById("signUpIdInput"),
+            signUpNickNameInput = document.getElementById("signUpNickNameInput"),
+            signUpPwInput = document.getElementById("signUpPwInput");
+        
+        signUpBtn.addEventListener("click",()=>{
+            let id = signUpIdInput.value,
+                pw = signUpPwInput.value,
+                nickName = signUpNickNameInput.value;
+
+            const form = new FormData();
+            form.append("email",id);
+            form.append("password",pw);
+            form.append("nick_name",nickName);
+
+            axios.get({
+                    baseURL: "http://15.164.153.174",
+                    timeout: 3000,
+                    headers: {"X-Http-Token": document.cookie("loginUserToken")}
+                })
+                .put("http://http://15.164.153.174/user", form)
+                .then(function (response) {
+                    console.log(response)
+                })
+                .catch(function (error) {
+                    console.log(error)
+                })
+
+                
+        })
+
+
+    </script>
+</body>
+</html>
