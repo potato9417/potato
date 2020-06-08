@@ -23,6 +23,7 @@ body {
 
 #topInfo {
   height: 50px;
+  line-height: 50px;
   background-color: #333;
   width: 100vw;
   position: absolute;
@@ -33,6 +34,32 @@ body {
 
 #topInfo .container {
   background-color: transparent;
+  position: relative;
+}
+
+#topInfo .container .text {
+  display: inline-block;
+}
+
+#topInfo .container .mainTopGoToProject {
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  right: 80px;
+}
+
+#topInfo .container .closeBtn {
+  position: relative;
+  top: 50%;
+  right: 0;
+}
+
+#topInfo .container .closeBtn span {
+  width: 30px;
+  height: 1px;
+  position: absolute;
+  background-color: #666;
 }
 
 #header {

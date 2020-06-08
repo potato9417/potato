@@ -19,6 +19,7 @@ body {
 
 #topInfo {
     height: 50px;
+    line-height: 50px;
     background-color: #333;
     width: 100vw;
     position: absolute;
@@ -27,6 +28,27 @@ body {
     color: #fff;
     .container {
         background-color: transparent;
+        position: relative;
+        .text {
+            display: inline-block;
+        }
+        .mainTopGoToProject {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            right: 80px;
+        }
+        .closeBtn {
+            position: relative;
+            top: 50%;
+            right: 0;
+            span {
+                width: 30px;
+                height: 1px;
+                position: absolute;
+                background-color: #666;
+            }
+        }
     }
 }
 
