@@ -1,0 +1,70 @@
+<script src="https://code.jquery.com/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+아이디 : <input id="email" type="text" placeholder="이메일 양식으로 입력" value="tester010@test.com"> <button id="idCheckButton">아이디 확인</button> </br>
+<p id="idCheckResultTxt">중복 확인을 해주세요.</p>
+비밀번호 : <input id="pw" type="password" placeholder="비밀번호 입력" value="Test!123"> </br>
+비밀번호 확인 : <input id="pwRepeat" type="password" placeholder="비밀번호 입력" value="Test!123"> </br>
+닉네임 : <input id="nickName" type="text" placeholder="이메일 양식으로 입력" value="테스트013"> <button id="nickNameCheckButton">닉네임 확인</button> </br>
+
+<button id="signUpBtn">회원가입</button>
+
+<script>
+
+    let isIdOk = false
+
+    
+    $('#signUpBtn').click(function() {
+        let inputId = $('#email').val()
+        let inputPw = $('#pw').val()
+        let inputNick = $('#nickName').val()
+
+        const form = new FormData();
+        form.append('email', inputId);
+        form.append('password', inputPw);
+        form.append('nick_name', inputNick);
+
+        axios.put('http://15.165.177.142/user', form)
+            .then(function (response) {
+
+                alert(response.data.message)
+            })
+            .catch(function (error) {
+
+                alert(error.response.data.message)
+
+            })
+    })
+   
+
+    $('#email').keyup(function() {
+        $('#idCheckResultTxt').text('중복 검사를 해주세요.')
+        isIdOk = false
+    })
+
+    $('#idCheckButton').click(function () {
+
+        let inputEmail = $('#email').val()
+        
+        axios.get('http://15.165.177.142/user_check', {
+            params: {
+                type: 'EMAIL',
+                value: inputEmail
+            }
+        })
+        .then(function (response) {
+            console.log(response);
+            if (response.data.code == 200) {
+                $('#idCheckResultTxt').text('사용해도 좋은 아이디입니다.')
+                isIdOk = true
+            }
+        })
+        .catch(function (error) {
+            console.log(error.response);
+            $('#idCheckResultTxt').text('중복 검사 통과에 실패했습니다.')
+            isIdOk = false
+        })
+
+    })
+
+</script>

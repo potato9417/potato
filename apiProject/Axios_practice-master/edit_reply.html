@@ -1,0 +1,65 @@
+<script src="https://code.jquery.com/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
+
+의견 남기기 화면
+
+<p id='title'>주제 적어둘 공간</p>
+
+진영 선택</br>
+
+<select id="side">
+    <option value="찬성">찬성</option>
+    <option value="반대">반대</option>
+</select></br>
+
+의견 내용</br>
+
+<input type="text" id="content"></br>
+
+<button id="postBtn">의견 남기기</button>
+
+<script>
+    let searchParams = new URLSearchParams(window.location.search)
+
+    let topicId = searchParams.get('id')
+    let topicTitle = searchParams.get('title')
+
+    console.log(topicTitle)
+
+    $('#title').text(topicTitle)
+
+    $('#postBtn').click(function () {
+
+        let postOk = confirm('정말 의견을 남기시겠습니까?')
+
+        if (postOk) {
+            console.log($('#side').val())  
+            console.log($('#content').val())  
+
+            const instance = axios.create({
+                baseURL: 'http://15.165.177.142',
+                timeout: 1000,
+                headers: {'X-Http-Token': $.cookie('loginUserToken')}
+            });
+
+            const form = new FormData();
+            form.append('topic_id', topicId);
+            form.append('content', $('#content').val());
+            form.append('selected_side', $('#side').val())
+
+            instance.post('/topic', form)
+            .then(function (response) {
+            console.log(response)
+            })
+            .catch(function (error) {
+                console.log(error)
+            });
+        }
+
+        
+
+    })
+
+</script>

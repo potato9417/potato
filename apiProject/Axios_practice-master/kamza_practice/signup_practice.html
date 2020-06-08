@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>토론웹</title>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans:wght@400;700&family=Jua&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./index.css">
+    <script src="https://code.jquery.com/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <div id="title">
+        <div id="back">
+            <i class="xi-arrow-left"></i>
+        </div>
+        <h1>회원가입</h1>
+    </div>
+    <div id="container" class="signup">
+        <div id="inner">
+            <p class="idBox">
+                <span>아이디</span><input id="email" type="text" placeholder="이메일 양식으로 입력" value="tester010@test.com">
+                <button id="idCheckButton">중복 확인</button>
+            </p> 
+            <p id="idCheckResultTxt">중복확인을 해주세요.</p>
+            <p>
+                <span>비밀번호</span><input id="pw" type="password" placeholder="비밀번호 입력" value="Test!123">
+            </p>
+            <p class="pwBox">
+                <span>비밀번호 확인</span><input id="pwRepeat" type="password" placeholder="비밀번호 입력" value="Test!123">
+            </p>
+            <p id="pwCheckResultTxt">비밀번호가 다릅니다.</p>
+            <p class="nickNameBox">
+                <span>닉네임</span><input id="nickName" type="text" placeholder="닉네임 입력" value="닉네임입력"> 
+                <button id="nickNameCheckButton">중복 확인</button>
+            </p>
+            <p id="nickNameCheckResultTxt">중복확인을 해주세요.</p>
+            <div id="btns">
+                <button id="signUpBtn">회원가입</button>
+            </div>
+
+        </div>
+
+    </div>
+    
+    
+
+    
+
+
+    <script>
+
+        let isIdOk = false
+        
+        $("#back").click(function(){
+            $(location).attr('href', 'login.html');
+        })
+        
+        $("#signUpBtn").click(function() {
+            let inputId = $("#email").val()
+            let inputPw = $("#pw").val()
+            let inputNick = $("#nickName").val()
+    
+            const form = new FormData();
+            form.append("email", inputId);
+            form.append("password", inputPw);
+            form.append("nick_name", inputNick);
+    
+            axios.put("http://15.165.177.142/user", form)
+                .then(function (response) {
+    
+                    alert(response.data.message)
+                })
+                .catch(function (error) {
+    
+                    alert(error.response.data.message)
+    
+                })
+        })
+       
+    
+        $("#email").keyup(function() {
+            $("#idCheckResultTxt").text("중복확인을 해주세요.")
+            $("#idCheckResultTxt").removeClass("red")
+            $("#idCheckResultTxt").removeClass("blue")
+            isIdOk = false
+        })
+    
+        $("#idCheckButton").click(function () {
+    
+            let inputEmail = $("#email").val()
+            
+            axios.get("http://15.165.177.142/user_check", {
+                params: {
+                    type: "EMAIL",
+                    value: inputEmail
+                }
+            })
+            .then(function (response) {
+                console.log(response);
+                if (response.data.code == 200) {
+                    $("#idCheckResultTxt").text("사용해도 좋은 아이디입니다.")
+                    $("#idCheckResultTxt").removeClass("red")
+                    $("#idCheckResultTxt").addClass("blue")
+
+                    isIdOk = true
+                }
+            })
+            .catch(function (error) {
+                console.log(error.response);
+                $("#idCheckResultTxt").text("중복된 아이디가 존재합니다.")
+                $("#idCheckResultTxt").removeClass("blue")
+                $("#idCheckResultTxt").addClass("red")
+                isIdOk = false
+            })
+    
+        })
+    
+    </script>
+    
+</body>
+</html>
+
+
+
+
+

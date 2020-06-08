@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>토론웹</title>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans:wght@400;700&family=Jua&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./index.css">
+    <script src="https://code.jquery.com/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+</head>
+<body>
+    <div id="title">
+        <div id="back">
+            <i class="xi-arrow-left"></i>
+        </div>
+        <h1>의견 남기기 화면</h1>
+    </div>
+
+    <div id="container" class="reply">
+        <p id="topicTitle">주제 적어둘 공간</p>
+    
+        <div class="select">
+            <p class="choice">찬/반 선택</p>
+        
+            <select id="side">
+                <option value="찬성" id="firstSide">찬성</option>
+                <option value="반대" id="secondSide">반대</option>
+            </select>
+        </div>
+
+        <div class="textArea">
+            <form>
+                <input type="text" id="content">
+            </form>
+    
+            <button id="postBtn">의견 남기기</button>
+        </div>
+    </div>
+
+    <script>
+        let searchParams = new URLSearchParams(window.location.search)
+    
+        let topicId = searchParams.get("id")
+        let topicTitle = searchParams.get("title")
+    
+        console.log(topicTitle)
+        $("#back").click(function(){
+            $(location).attr("href", "main.html");
+        })
+    
+        $("#topicTitle").text(topicTitle)
+    
+        $("#postBtn").click(function () {
+    
+            let postOk = confirm("정말 의견을 남기시겠습니까?")
+    
+            if (postOk) {
+                console.log($("#side").val())  
+                console.log($("#content").val())  
+    
+                const instance = axios.create({
+                    baseURL: "http://15.165.177.142",
+                    timeout: 1000,
+                    headers: {"X-Http-Token": $.cookie("loginUserToken")}
+                });
+    
+                const form = new FormData();
+                form.append("topic_id", topicId);
+                form.append("content", $("#content").val());
+                form.append("selected_side", $("#side").val())
+    
+                instance.post("/topic", form)
+                .then(function (response) {
+                console.log(response)
+                })
+                .catch(function (error) {
+                    console.log(error)
+                });
+            }
+        })
+    
+    </script>
+</body>
+</html>
