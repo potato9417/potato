@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Project80</title>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://code.jquery.com/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <script src="../js/custom_axios.js"></script>
 </head>
 <body>
     <h2 id="title">회원가입</h2>
@@ -21,33 +24,32 @@
             signUpIdInput = document.getElementById("signUpIdInput"),
             signUpNickNameInput = document.getElementById("signUpNickNameInput"),
             signUpPwInput = document.getElementById("signUpPwInput");
-        
+
+
         signUpBtn.addEventListener("click",()=>{
-            let id = signUpIdInput.value,
-                pw = signUpPwInput.value,
-                nickName = signUpNickNameInput.value;
+            let confirmJoin = confirm("가입하시겠습니까?");
+            if(confirmJoin){
+                let id = signUpIdInput.value,
+                    pw = signUpPwInput.value,
+                    nickName = signUpNickNameInput.value;
 
-            const form = new FormData();
-            form.append("email",id);
-            form.append("password",pw);
-            form.append("nick_name",nickName);
+                const form = new FormData();
+                form.append("email",id);
+                form.append("password",pw);
+                form.append("nick_name",nickName);
 
-            axios.get({
-                    baseURL: "http://15.164.153.174",
-                    timeout: 3000,
-                    headers: {"X-Http-Token": document.cookie("loginUserToken")}
-                })
-                .put("http://http://15.164.153.174/user", form)
-                .then(function (response) {
-                    console.log(response)
-                })
-                .catch(function (error) {
-                    console.log(error)
-                })
-
+                axiosInstance.put("/user", form)
+                    .then((res)=>{
+                        if(res.data.code==200){
+                            location.href="./login.html";
+                        }
+                    })
+                    .catch((error)=>{
+                        console.log(error.response.data.message)
+                    })
+            }
                 
         })
-
 
     </script>
 </body>
