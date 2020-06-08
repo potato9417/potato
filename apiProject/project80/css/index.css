@@ -11,4 +11,31 @@ body {
   font-size: 1.6rem;
   font-family: serif;
   color: #333;
+  background-color: #666;
+}
+
+.container {
+  width: 1100px;
+  height: auto;
+  margin: auto;
+  background-color: #fff;
+}
+
+#topInfo {
+  height: 50px;
+  background-color: #333;
+  width: 100vw;
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: #fff;
+}
+
+#topInfo .container {
+  background-color: transparent;
+}
+
+#header {
+  width: 100vw;
+  height: 100px;
 }
