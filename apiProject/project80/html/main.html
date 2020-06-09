@@ -5,16 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Project80</title>
     <link rel="stylesheet" href="../css/reset.css">
+    <link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Noto+Sans+KR:wght@400;500;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/swiper.min.css">
     <link rel="stylesheet" href="../css/common.css">
     <link rel="stylesheet" href="../css/index.css">
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://code.jquery.com/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <script src="../js/swiper.min.js"></script>
     <script src="../js/custom_axios.js"></script>
 </head>
 <body>
-    <div class="container">
-        <div id="topInfo">
+    <div id="topInfo">
             <div class="container">
                 <p class="txt">과도한 프로젝트 생성은 서버 과부화에 영향을 미칠 수 있습니다 :)</p>
                 <button class="btns mainTopGoToProject" onClick="location.href='project.html'">프로젝트 만들러가기</button>
@@ -25,106 +27,95 @@
             </div>
         </div>
         <!-- topInfo end -->
-    
-        <header id="header">
+
+    <header id="header">
+        <div class="container">
             <h1 id="logo">
-                <a href="./main.html">로고이미지</a>
+                <button onClick="location.href='main.html'">PROJECT80</button>
             </h1>
             <nav id="gnb">
-                <h2>global navigation</h2>
+                <h2 class="hidden">global navigation</h2>
                 <ul>
                     <li>개요</li>
                     <li>프로젝트</li>
                     <li>마이페이지</li>
                 </ul>
             </nav>
+            <div class="util login">
+                <button onClick="location.href='login.html'">로그인</button>
+                <button onClick="location.href='join.html'">회원가입</button>
+            </div>
             <div class="util">
-                <a href="./login.html">로그인</a>
-                <a href="./sign_up.html">회원가입</a>
+                <button onClick="location.href='login.html'">로그아웃</button>
             </div>
-            <div class="util loginOk">
-                <a href="./login.html">로그아웃</a>
-            </div>
-        </header>
-        <!-- header end -->
-    
-        <section id="mainVisual">
-            <ul>
-                <li>
-                    첫번째 사진
-                    <img src="" alt="">
+        </div>
+    </header>
+    <!-- header end -->
+
+    <div class="container">
+        <section id="mainVisual" class="swiper-container">
+            <ul class="swiper-wrapper">
+                <li class="swiper-slide">
+                    <div class="imgBox">
+                        <img src="../images/main_programming_swiper.jpg" alt="">
+                    </div>
                 </li>   
-                <li>
-                    두번째 사진
-                    <img src="" alt="">
+                <li class="swiper-slide">
+                    <div class="imgBox">
+                        <img src="../images/main_bycle_swper.jpg" alt="">
+                    </div>
                 </li>  
-                <li>
-                    세번째 사진
-                    <img src="" alt="">
+                <li class="swiper-slide">
+                    <div class="imgBox">
+                        <img src="../images/main_book_swiper.jpg" alt="">
+                    </div>
                 </li>           
             </ul>
         </section>
         <!-- mainVisual end -->
     
-        <section id="doingProject" class="loginOk">
+        <section id="myProject" class="mainProjectList login">
             <h3>나의 프로젝트</h3>
-            <ul>
-                <li>
-                    <div class="imgBox">
-                        <img src="" alt="">
-                    </div>
-                    <div class="txtBox">
-                        <p class="title">프로젝트 이름</p>
-                        <p class="sub">프로젝트 설명</p>
-                    </div>
-                    <button class="btns main goToProject" onClick="location.href='project_detail.html'">바로가기</button>
-                </li>
-            </ul>
+            <div class="swiper-container">
+                <ul class="swiper-wrapper">
+                </ul>
+            </div>
+            <button class="pageChangeBtn" onClick="location.href='mypage.html'">더 보기</button>
         </section>
         <!-- doingProject end -->
     
-        <section id="recommendProject">
+        <section id="recommendProject" class="mainProjectList">
             <h3>추천 프로젝트</h3>
-            <ul>
-                <li>
-                    <div class="imgBox">
-                        <img src="" alt="">
-                    </div>
-                    <div class="txtBox">
-                        <p class="title">프로젝트 이름</p>
-                        <p class="sub">프로젝트 설명</p>
-                    </div>
-                    <button class="btns main goToProject" onClick="location.href='project_detail.html'">바로가기</button>
-                </li>
-            </ul>
+            <div class="swiper-container">
+                <ul class="swiper-wrapper">
+
+                </ul>
+            </div>
+            <button class="pageChangeBtn" onClick="location.href='project.html'">더 보기</button>
         </section>
         <!-- recommendProject end -->
     
-        <section id="newProject">
+        <section id="newProject" class="mainProjectList">
             <h3>새로운 프로젝트</h3>
-            <ul>
-                <li>
-                    <div class="imgBox">
-                        <img src="" alt="">
-                    </div>
-                    <div class="txtBox">
-                        <p class="title">프로젝트 이름</p>
-                        <p class="sub">프로젝트 설명</p>
-                    </div>
-                    <button class="btns main goToProject" onClick="location.href='project_detail.html'">바로가기</button>
-                </li>
-            </ul>
+            <div class="swiper-container">
+                <ul class="swiper-wrapper">
+                   
+                </ul>
+            </div>
+            <button class="pageChangeBtn" onClick="location.href='project.html'">더 보기</button>
         </section>
         <!-- newProject end -->
-    
-        <footer id="footer">
+    </div>
+        
+    <footer id="footer">
+        <div class="container">
             <div class="footerLogoImg">
-                <img src="" alt="">
+                <p>PROJECT80</p>
             </div>
-            <address>
-                <p>E-mail : potato9417@gmail.com</p> 
-                <p>TEL : 010-7752-4709</p> 
-                <p>Copyright 2020. potato9417. All rights reserved.</p>
+            <address class="address">
+                <p>E-mail : potato9417@gmail.com </p> 
+                <p>| Tel : 010-7752-4709</p> 
+                <p class="copyright">Copyright 2020. potato9417. All rights reserved.</p>
             </address>
             <div class="shareOtherSite">
                 <button class="kakaoShare">
@@ -134,8 +125,71 @@
                     <img src="" alt="">
                 </button>
             </div>
-        </footer>
-        <!-- footer end -->
-    </div>
+        </div>
+    </footer>
+    <!-- footer end -->
+
+    <script>
+        const myProject = document.querySelector("#myProject ul"),
+            recommendProject = document.querySelector("#recommendProject ul"),
+            newProject = document.querySelector("#newProject ul");
+
+        console.log(recommendProject);
+        axiosInstance.get('/project', {
+                params: {
+                    // project에선 아직 첨부할 자료가 없어서 비워둔다
+                }
+            })
+            .then(function (res) {
+                res.data.data.projects.forEach(project => {
+                    console.log(project);
+                    $(recommendProject).append(`
+                        <li class="swiper-slide" id="${project.id}">
+                            <div class="imgBox">
+                                <img src="${project.img_url}" alt="">
+                            </div>
+                            <div class="txtBox">
+                                <p class="title">${project.title}</p>
+                                <p class="sub">${project.description}</p>
+                            </div>
+                            <button class="btns main goToProject" onClick="location.href='project_detail.html'">바로가기</button>
+                        </li>
+                    `)
+                    $(newProject).append(`
+                        <li class="swiper-slide" id="${project.id}">
+                            <div class="imgBox">
+                                <img src="${project.img_url}" alt="">
+                            </div>
+                            <div class="txtBox">
+                                <p class="title">${project.title}</p>
+                                <p class="sub">${project.description}</p>
+                            </div>
+                            <button class="btns main goToProject" onClick="location.href='project_detail.html'">바로가기</button>
+                        </li>
+                    `)
+                });
+            })
+
+        
+        const closeBtn = document.querySelector("#topInfo .closeBtn"),
+            topInfo = document.getElementById("topInfo");
+
+        closeBtn.addEventListener("click",()=>{
+            topInfo.classList.add("remove");
+        })
+
+    </script>
+
+    <script>
+        new Swiper(".swiper-container",{
+            loop:true,
+        });
+
+        new Swiper(".mainProjectList .swiper-container",{
+            loop:true,
+            slidesPerView : 3,
+            autoplay:true,
+        });
+    </script>
 </body>
 </html>

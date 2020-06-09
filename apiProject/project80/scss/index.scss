@@ -6,23 +6,16 @@ html {
 }
 body {
     font-size: 1.6rem;
-    font-family: serif;
+    font-family: "Roboto", "Noto Sans KR", sans-serif;
     color: #333;
-    background-color: #666;
-}
-.container {
-    width: 1100px;
-    height: auto;
-    margin: auto;
-    background-color: #fff;
+    background-color: #333;
 }
 
 #topInfo {
     height: 50px;
     line-height: 50px;
     background-color: #333;
-    width: 100vw;
-    position: absolute;
+    width: 100%;
     top: 0;
     left: 0;
     color: #fff;
@@ -39,21 +32,243 @@ body {
             right: 80px;
         }
         .closeBtn {
-            position: relative;
+            position: absolute;
             top: 50%;
+            transform: translateY(-50%);
             right: 0;
+            padding: 20px 40px 20px 10px;
+            cursor: pointer;
             span {
-                width: 30px;
-                height: 1px;
+                width: 26px;
+                height: 3px;
                 position: absolute;
                 background-color: #666;
+                &:nth-child(1) {
+                    transform: rotate(45deg);
+                }
+                &:nth-child(2) {
+                    transform: rotate(-45deg);
+                }
             }
+            
         }
+    }
+    &.remove {
+        display: none;
     }
 }
 
 #header {
-    width: 100vw;
+    width: 100%;
     height: 100px;
+    position: relative;
+    top: 0;
+    background-color: #fff;
+    .container {
+        width: 1400px;
+        margin: auto;
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+
+        #logo {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            left: 0;
+            button {
+                border: none;
+                outline: none;
+                font-size: 4rem;
+                background-color: transparent;
+                color: #a200bc;
+                font-weight: bold;
+                font-family: "Architects Daughter";
+            }
+        }
+        #gnb {
+            position: absolute;
+            left: 500px;
+            top: 50%;
+            transform: translateY(-50%);
+            ul {
+                li {
+                    display: inline-block;
+                    padding: 40px;
+                    font-weight: 700;
+                    font-size: 2rem;
+                    cursor: pointer;
+                    transition: 0.5s ease;
+                    &:hover {
+                        color: #a200bc;
+                    }
+                }
+            }
+        }
+        .util {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            right: 0px;
+            button {
+                border: none;
+                outline: none;
+                background-color: transparent;
+                font-weight: 700;
+                cursor: pointer;
+            }
+            
+        }
+    }
     
+}
+
+
+.container {
+    width: 1400px;
+    height: auto;
+    margin: auto;
+    background-color: #fff;
+    position: relative;
+
+    #mainVisual {
+        ul {
+            li {
+                width: 100%;
+                height: 750px;
+                overflow: hidden;
+                background-color: #a200bc;
+                .imgBox {
+                    width: 1400px;
+                    img {
+                        width: 100%;
+                    }
+                }
+            }
+        }
+    }
+
+    .mainProjectList {
+        margin-top: 120px;
+        padding: 0 80px;
+        text-align: center;
+        h3 {
+            font-size: 2.4rem;
+            font-weight: 700;
+            display: inline-block;
+        }
+        .swiper-container {
+            ul {
+                margin-top: 50px;
+                height: 100%;
+                li {
+                    width: 30%;
+                    margin: 0 20px;
+                    height: 100%;
+                    padding: 20px;
+                    background-color: #333;
+                    color: #fff;
+                    display: inline-block;
+                    text-align: right;
+                    .imgBox {
+                        width: 100%;
+                        height: 200px;
+                        overflow: hidden;
+                        margin-bottom: 30px;
+                        img {
+                            width: 100%;
+                        }
+                    }
+                    .txtBox {
+                        text-align: left;
+                        .title {
+                            font-size: 1.8rem;
+                            font-weight: 500;
+                            margin-bottom: 15px;
+                        }
+                        .sub {
+                            margin-bottom: 25px;
+                        }
+    
+                    }
+    
+                }
+            }
+        }
+        .pageChangeBtn {
+            border: none;
+            background-color: transparent;
+            outline: none;
+            color: #a200bc;
+            font-weight: 700;
+            margin-top: 50px;
+            font-size: 1.4rem;
+        }
+        
+    }
+    #newProject {
+        padding-bottom: 200px;
+    }
+
+}
+
+#footer {
+    height: 120px;
+    background-color: #e5e5e5;
+    padding-top: 20px;
+    .container {
+        background-color: transparent;
+        width: 1100px;
+        height: 100%;
+        margin: auto;
+        position: relative;
+        .footerLogoImg{
+            p {
+                font-size: 3rem;
+                background-color: transparent;
+                color: #621c6d;
+                font-weight: bold;
+                font-family: "Architects Daughter";
+            }
+        }
+        .address {
+            text-align: center;
+            position: absolute;
+            left: 25%;
+            bottom: 10px;
+            p {
+                display: inline-block;
+            }
+            .copyright {
+                display: block;
+                font-size: 1.2rem;
+            }
+        }
+        .shareOtherSite {
+            position: absolute;
+            right: 0;
+        }
+
+    }
+}
+
+
+
+
+
+
+.login,.click {
+    display: none;
+}
+.btns {
+    background-color: #a200bc;
+    color: #fff;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    padding: 4px 15px;
+    cursor: pointer;
+}
+button {
+    cursor: pointer;
 }

@@ -1,0 +1,28 @@
+*,*:before,*:after {
+    box-sizing: border-box;
+}
+html {
+    font-size: 10px;
+}
+body {
+    font-size: 1.6rem;
+    font-family: "Roboto", "Noto Sans KR", sans-serif;
+    color: #333;
+    background-color: #666;
+}
+
+
+
+
+
+.login,.click {
+    display: none;
+}
+.btns {
+    background-color: #a200bc;
+    color: #fff;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    padding: 4px 15px;
+}

@@ -1,17 +1,75 @@
 <html>
     <head>
+        <link rel="stylesheet" type="text/css" href="css/main.css">
         <script src="https://code.jquery.com/jquery.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
         <!-- 커스터마이징한 axiosInstace 들고있는 파일 -->
         <script src="/custom_axios.js"></script>
+        
     </head>
     <body>
         메인화면
 
+        <ul id='projectList'>
+            
+        </ul>
+
         <script>
             // 메인 화면 접속 하자마자 쿠키에 저장된 토큰 확인
             console.log('메인에서의 쿠키 : ', $.cookie('userToken'))
+
+            // POST/PUT은 FormData를 쓰지만
+            // GET은 직접 params로 필요한걸 적자
+
+            axiosInstance.get('/project', {
+                params: {
+                    // project에선 아직 첨부할 자료가 없어서 비워둔다
+                }
+            })
+            .then(function (res) {
+                
+                // 응답으로 내려오는 프로젝트 목록을 가지고 forEach
+                res.data.data.projects.forEach(project => {
+                    // 프로젝트 하나하나가 project에 담겨있다
+                    console.log(project)
+
+                    // 프로젝트 하나하나를 ul (projectList) 에게 추가.
+                    // img의 src로 프로젝트의 img_url 항목 배치
+                    // 문구로 프로젝트의 title 배치
+                    // <li> 는 간략하게 넣은 샘플
+
+                    // 어떤 프로젝트에 대한 li인지를 project_id 속성을 맘대로 추가해서 적어두고 있다.
+                    $('#projectList').append(`
+                    <li project_id=${project.id}>
+                        <div>
+                            <img class="projectListItem" src='${project.img_url}'> 
+                            ${project.title}
+                        </div>
+                    </li>
+                    `)
+                });
+
+
+                // li가 모두 추가되면 그들에게 이벤트를 부여
+                $('#projectList li').click(function() {
+
+                    // 눌린 줄 $(this) 의 속성중 project_id에 적힌 값을 변수로 저장
+
+                    let projectId = $(this).attr('project_id')
+
+                    // 주소창에 프로젝트id를 덧붙여서 상세화면으로 이동
+
+                    $(location).attr('href', `project_detail.html?id=${projectId}`)
+
+                })
+
+            })
+            .catch(function (error) {
+                // 실패시 error의 응답에 담긴 message를 얼럿으로
+                alert(error.response.data.message)
+            })
+
         </script>
     </body>
 </html>
