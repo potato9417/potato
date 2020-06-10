@@ -169,106 +169,33 @@ body {
   width: 100%;
 }
 
-.container #recommendProject {
+.container .mainProjectList {
   margin-top: 120px;
   padding: 0 80px;
   text-align: center;
 }
 
-.container #recommendProject h3 {
+.container .mainProjectList h3 {
   font-size: 2.4rem;
   font-weight: 700;
   display: inline-block;
 }
 
-.container #recommendProject .swiper-container {
-  position: relative;
-}
-
-.container #recommendProject .swiper-container button {
+.container .mainProjectList div button {
   position: absolute;
   bottom: 20px;
   right: 20px;
 }
 
-.container #recommendProject .swiper-container ul {
+.container .mainProjectList div ul {
   margin-top: 50px;
   height: 100%;
 }
 
-.container #recommendProject .swiper-container ul li {
-  width: 30%;
-  margin: 0 20px;
-  height: 400px;
-  padding: 20px;
-  background-color: #333;
-  color: #fff;
-  display: inline-block;
-  text-align: right;
-}
-
-.container #recommendProject .swiper-container ul li .imgBox {
-  width: 100%;
-  height: 200px;
-  overflow: hidden;
-  margin-bottom: 30px;
-}
-
-.container #recommendProject .swiper-container ul li .imgBox img {
-  width: 100%;
-}
-
-.container #recommendProject .swiper-container ul li .txtBox {
-  text-align: left;
-}
-
-.container #recommendProject .swiper-container ul li .txtBox .title {
-  font-size: 1.8rem;
-  font-weight: 500;
-  margin-bottom: 15px;
-}
-
-.container #recommendProject .swiper-container ul li .txtBox .sub {
-  margin-bottom: 25px;
-}
-
-.container #recommendProject .pageChangeBtn {
-  border: none;
-  background-color: transparent;
-  outline: none;
-  color: #a200bc;
-  font-weight: 700;
-  margin-top: 50px;
-  font-size: 1.4rem;
-}
-
-.container #newProject {
-  margin-top: 120px;
-  padding: 0 80px;
-  text-align: center;
-}
-
-.container #newProject h3 {
-  font-size: 2.4rem;
-  font-weight: 700;
-  display: inline-block;
-}
-
-.container #newProject .newProjectBox button {
-  position: absolute;
-  bottom: 20px;
-  right: 20px;
-}
-
-.container #newProject .newProjectBox ul {
-  margin-top: 50px;
-  height: 100%;
-}
-
-.container #newProject .newProjectBox ul li {
-  width: 30%;
+.container .mainProjectList div ul li {
+  width: 400px;
   vertical-align: top;
-  margin-left: 58px;
+  margin-left: 16px;
   height: 400px;
   padding: 20px;
   background-color: #333;
@@ -278,36 +205,36 @@ body {
   position: relative;
 }
 
-.container #newProject .newProjectBox ul li:nth-child(1) {
+.container .mainProjectList div ul li:nth-child(1) {
   margin-left: 0;
 }
 
-.container #newProject .newProjectBox ul li .imgBox {
+.container .mainProjectList div ul li .imgBox {
   width: 100%;
   height: 200px;
   overflow: hidden;
   margin-bottom: 30px;
 }
 
-.container #newProject .newProjectBox ul li .imgBox img {
+.container .mainProjectList div ul li .imgBox img {
   width: 100%;
 }
 
-.container #newProject .newProjectBox ul li .txtBox {
+.container .mainProjectList div ul li .txtBox {
   text-align: left;
 }
 
-.container #newProject .newProjectBox ul li .txtBox .title {
+.container .mainProjectList div ul li .txtBox .title {
   font-size: 1.8rem;
   font-weight: 500;
   margin-bottom: 15px;
 }
 
-.container #newProject .newProjectBox ul li .txtBox .sub {
+.container .mainProjectList div ul li .txtBox .sub {
   margin-bottom: 25px;
 }
 
-.container #newProject .pageChangeBtn {
+.container .mainProjectList .pageChangeBtn {
   border: none;
   background-color: transparent;
   outline: none;
