@@ -1,0 +1,75 @@
+#joinContainer {
+    height: 100%;
+    padding: 106px 0;
+    text-align: center;
+    #title {
+        margin-bottom: 95px;
+        font-size: 4rem;
+        font-weight: 700;
+    }
+    .inner {
+        width: 525px;
+        margin: auto;
+        text-align: left;
+        p {
+            width: 100px;
+            display: inline-block;
+            font-size: 2.5rem;
+            margin-right: 50px;
+            font-weight: 700;
+        }
+        input {
+            width: 370px;
+            height: 50px;
+            padding: 5px 10px;
+            margin-bottom: 30px;
+        }
+        button {
+            margin-top: 61px;
+            width: 100%;
+            padding: 15px 0;
+            font-size: 1.6rem;
+        }
+    }
+}
+
+#loginContainer {
+    height: 100%;
+    padding: 106px 0;
+    text-align: center;
+    #title {
+        margin-bottom: 95px;
+        font-size: 4rem;
+        font-weight: 700;
+    }
+    .inner {
+        width: 525px;
+        margin: auto;
+        text-align: left;
+        p {
+            width: 100px;
+            display: inline-block;
+            font-size: 2.5rem;
+            margin-right: 50px;
+            font-weight: 700;
+        }
+        input {
+            width: 370px;
+            height: 50px;
+            padding: 5px 10px;
+            margin-bottom: 30px;
+        }
+        button {
+            width: 100%;
+            padding: 15px 0;
+            font-size: 1.6rem;
+        }
+        #loginBtn {
+            margin-top: 70px;
+            margin-bottom: 20px;
+        }
+        #signUpBtn {
+            background-color: #666;
+        }
+    }
+}

@@ -5,22 +5,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Project80</title>
     <link rel="stylesheet" href="../css/reset.css">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Noto+Sans+KR:wght@400;500;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="import" href="main.html">
     <link rel="stylesheet" href="../css/common.css">
     <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="../css/loginAndJoin.css">
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://code.jquery.com/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
     <script src="../js/custom_axios.js"></script>
 </head>
 <body>
-    <div class="container">
-        <header id="header">
+    <div id="topInfo">
+        <div class="container">
+            <p class="txt">과도한 프로젝트 생성은 서버 과부화에 영향을 미칠 수 있습니다 :)</p>
+            <button class="btns mainTopGoToProject" onClick="location.href='project.html'">프로젝트 만들러가기</button>
+            <div class="closeBtn">
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </div>
+    <!-- topInfo end -->
+
+    <header id="header">
+        <div class="container">
             <h1 id="logo">
-                <a href="./main.html">로고이미지</a>
+                <button onClick="location.href='main.html'">PROJECT80</button>
             </h1>
             <nav id="gnb">
-                <h2>global navigation</h2>
+                <h2 class="hidden">global navigation</h2>
                 <ul>
                     <li>개요</li>
                     <li>프로젝트</li>
@@ -28,35 +42,39 @@
                 </ul>
             </nav>
             <div class="util">
-                <a href="./login.html">로그인</a>
-                <a href="./sign_up.html">회원가입</a>
+                <button onClick="location.href='login.html'">로그인</button>
+                <button onClick="location.href='join.html'">회원가입</button>
             </div>
-            <div class="util loginOk">
-                <a href="./login.html">로그아웃</a>
-            </div>
-        </header>
-        <!-- header end -->
+        </div>
+    </header>
+    <!-- header end -->
     
     <div class="container">
         <section id="loginContainer">
             <h2 id="title">로그인</h2>
-            <form>
-                <p id="loginId">아이디</p> <input id="loginIdInput" type="text" placeholder="이메일을 입력해주세요.">
-                <p id="loginPw">비밀번호</p> <input id="loginPwInput" type="text" placeholder="비밀번호를 입력해주세요.">
-            </form>
-            <button id="loginBtn">로그인</button>
-            <button id="signUpBtn" onClick="location.href='sign_up.html'">회원가입</button>
-        </section>
-        <!-- loginContainer end -->
-    
-        <footer id="footer">
-            <div class="footerLogoImg">
-                <img src="" alt="">
+            <div class="inner">
+                <form>
+                    <p id="loginId">아이디</p> <input id="loginIdInput" type="text" placeholder="이메일을 입력해주세요.">
+                    <p id="loginPw">비밀번호</p> <input id="loginPwInput" type="text" placeholder="비밀번호를 입력해주세요.">
+                </form>
+                <button id="loginBtn" >로그인
+                    onClick="location.href='main.html'"
+                </button>
+                <button id="signUpBtn" onClick="location.href='sign_up.html'" class="btns">회원가입</button>
             </div>
-            <address>
-                <p>E-mail : potato9417@gmail.com</p> 
-                <p>TEL : 010-7752-4709</p> 
-                <p>Copyright 2020. potato9417. All rights reserved.</p>
+        </section>
+    </div>
+    <!-- loginContainer end -->
+
+    <footer id="footer">
+        <div class="container">
+            <div class="footerLogoImg">
+                <p>PROJECT80</p>
+            </div>
+            <address class="address">
+                <p>E-mail : potato9417@gmail.com </p> 
+                <p>| Tel : 010-7752-4709</p> 
+                <p class="copyright">Copyright 2020. potato9417. All rights reserved.</p>
             </address>
             <div class="shareOtherSite">
                 <button class="kakaoShare">
@@ -66,15 +84,17 @@
                     <img src="" alt="">
                 </button>
             </div>
-        </footer>
-        <!-- footer end -->
-    </div>
+        </div>
+    </footer>
+    <!-- footer end -->
 
 
     <script>
         const loginBtn = document.getElementById("loginBtn"),
             loginId = document.getElementById("loginIdInput"),
             loginPw = document.getElementById("loginPwInput");
+
+        console.log(document.cookie)
 
         loginBtn.addEventListener("click",()=>{
             let id = loginId.value,
@@ -84,16 +104,25 @@
             const form = new FormData();
             form.append("email",id);
             form.append("password",pw);
-
             axiosInstance.post("/user",form)
                 .then((res)=>{
                     if(res.data.code==200){
+                        // console.log(res)
+                        let token = res.data.data.token;
+
+                        $.cookie("userToken", token);
+
+                        console.log($.cookie("userToken"))
+
+
                         // console.log(res.data.data.user.nick_name)
-                        location.href="./main.html";
+                        // location.href="./main.html";
+
+
                     }
                 })
                 .catch((error)=>{
-                    console.log(error.response.data.message)
+                    alert(error.response.data.message)
                 })
 
         })

@@ -12,6 +12,7 @@ body {
   font-family: "Roboto", "Noto Sans KR", sans-serif;
   color: #333;
   background-color: #333;
+  line-height: 1.5;
 }
 
 #topInfo {
@@ -109,7 +110,7 @@ body {
 
 #header .container #gnb {
   position: absolute;
-  left: 500px;
+  left: 700px;
   top: 50%;
   -webkit-transform: translateY(-50%);
           transform: translateY(-50%);
@@ -168,27 +169,37 @@ body {
   width: 100%;
 }
 
-.container .mainProjectList {
+.container #recommendProject {
   margin-top: 120px;
   padding: 0 80px;
   text-align: center;
 }
 
-.container .mainProjectList h3 {
+.container #recommendProject h3 {
   font-size: 2.4rem;
   font-weight: 700;
   display: inline-block;
 }
 
-.container .mainProjectList .swiper-container ul {
+.container #recommendProject .swiper-container {
+  position: relative;
+}
+
+.container #recommendProject .swiper-container button {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+}
+
+.container #recommendProject .swiper-container ul {
   margin-top: 50px;
   height: 100%;
 }
 
-.container .mainProjectList .swiper-container ul li {
+.container #recommendProject .swiper-container ul li {
   width: 30%;
   margin: 0 20px;
-  height: 100%;
+  height: 400px;
   padding: 20px;
   background-color: #333;
   color: #fff;
@@ -196,32 +207,107 @@ body {
   text-align: right;
 }
 
-.container .mainProjectList .swiper-container ul li .imgBox {
+.container #recommendProject .swiper-container ul li .imgBox {
   width: 100%;
   height: 200px;
   overflow: hidden;
   margin-bottom: 30px;
 }
 
-.container .mainProjectList .swiper-container ul li .imgBox img {
+.container #recommendProject .swiper-container ul li .imgBox img {
   width: 100%;
 }
 
-.container .mainProjectList .swiper-container ul li .txtBox {
+.container #recommendProject .swiper-container ul li .txtBox {
   text-align: left;
 }
 
-.container .mainProjectList .swiper-container ul li .txtBox .title {
+.container #recommendProject .swiper-container ul li .txtBox .title {
   font-size: 1.8rem;
   font-weight: 500;
   margin-bottom: 15px;
 }
 
-.container .mainProjectList .swiper-container ul li .txtBox .sub {
+.container #recommendProject .swiper-container ul li .txtBox .sub {
   margin-bottom: 25px;
 }
 
-.container .mainProjectList .pageChangeBtn {
+.container #recommendProject .pageChangeBtn {
+  border: none;
+  background-color: transparent;
+  outline: none;
+  color: #a200bc;
+  font-weight: 700;
+  margin-top: 50px;
+  font-size: 1.4rem;
+}
+
+.container #newProject {
+  margin-top: 120px;
+  padding: 0 80px;
+  text-align: center;
+}
+
+.container #newProject h3 {
+  font-size: 2.4rem;
+  font-weight: 700;
+  display: inline-block;
+}
+
+.container #newProject .newProjectBox button {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+}
+
+.container #newProject .newProjectBox ul {
+  margin-top: 50px;
+  height: 100%;
+}
+
+.container #newProject .newProjectBox ul li {
+  width: 30%;
+  vertical-align: top;
+  margin-left: 58px;
+  height: 400px;
+  padding: 20px;
+  background-color: #333;
+  color: #fff;
+  display: inline-block;
+  text-align: right;
+  position: relative;
+}
+
+.container #newProject .newProjectBox ul li:nth-child(1) {
+  margin-left: 0;
+}
+
+.container #newProject .newProjectBox ul li .imgBox {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  margin-bottom: 30px;
+}
+
+.container #newProject .newProjectBox ul li .imgBox img {
+  width: 100%;
+}
+
+.container #newProject .newProjectBox ul li .txtBox {
+  text-align: left;
+}
+
+.container #newProject .newProjectBox ul li .txtBox .title {
+  font-size: 1.8rem;
+  font-weight: 500;
+  margin-bottom: 15px;
+}
+
+.container #newProject .newProjectBox ul li .txtBox .sub {
+  margin-bottom: 25px;
+}
+
+.container #newProject .pageChangeBtn {
   border: none;
   background-color: transparent;
   outline: none;
@@ -289,7 +375,6 @@ body {
   outline: none;
   border-radius: 5px;
   padding: 4px 15px;
-  cursor: pointer;
 }
 
 button {

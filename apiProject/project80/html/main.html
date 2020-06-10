@@ -41,12 +41,14 @@
                     <li>마이페이지</li>
                 </ul>
             </nav>
-            <div class="util login">
-                <button onClick="location.href='login.html'">로그인</button>
-                <button onClick="location.href='join.html'">회원가입</button>
-            </div>
             <div class="util">
-                <button onClick="location.href='login.html'">로그아웃</button>
+                <div class="loginUtilBox">
+                    <button onClick="location.href='login.html'">로그인</button>
+                    <button onClick="location.href='join.html'">회원가입</button>
+                </div>
+                <div class="logoutUtilBox">
+                    <button  onClick="location.href='login.html'">로그아웃</button>
+                </div>
             </div>
         </div>
     </header>
@@ -97,8 +99,8 @@
     
         <section id="newProject" class="mainProjectList">
             <h3>새로운 프로젝트</h3>
-            <div class="swiper-container">
-                <ul class="swiper-wrapper">
+            <div class="newProjectBox">
+                <ul>
                    
                 </ul>
             </div>
@@ -130,11 +132,15 @@
     <!-- footer end -->
 
     <script>
+        // console.log($.cookie("userToken"))
+
         const myProject = document.querySelector("#myProject ul"),
             recommendProject = document.querySelector("#recommendProject ul"),
             newProject = document.querySelector("#newProject ul");
 
-        console.log(recommendProject);
+        let projectArr = [];
+
+        // console.log(recommendProject);
         axiosInstance.get('/project', {
                 params: {
                     // project에선 아직 첨부할 자료가 없어서 비워둔다
@@ -142,7 +148,10 @@
             })
             .then(function (res) {
                 res.data.data.projects.forEach(project => {
-                    console.log(project);
+                    
+                    projectArr.push(project);
+                    
+
                     $(recommendProject).append(`
                         <li class="swiper-slide" id="${project.id}">
                             <div class="imgBox">
@@ -155,19 +164,25 @@
                             <button class="btns main goToProject" onClick="location.href='project_detail.html'">바로가기</button>
                         </li>
                     `)
+                });
+                console.log(projectArr);
+                for(let i=0;i<3;i++){
+                                   
                     $(newProject).append(`
-                        <li class="swiper-slide" id="${project.id}">
+                        <li id="${projectArr[projectArr.length-1-i].id}">
                             <div class="imgBox">
-                                <img src="${project.img_url}" alt="">
+                                <img src="${projectArr[projectArr.length-1-i].img_url}" alt="">
                             </div>
                             <div class="txtBox">
-                                <p class="title">${project.title}</p>
-                                <p class="sub">${project.description}</p>
+                                <p class="title">${projectArr[projectArr.length-1-i].title}</p>
+                                <p class="sub">${projectArr[projectArr.length-1-i].description}</p>
                             </div>
                             <button class="btns main goToProject" onClick="location.href='project_detail.html'">바로가기</button>
                         </li>
                     `)
-                });
+
+                }
+                
             })
 
         
@@ -181,15 +196,30 @@
     </script>
 
     <script>
-        new Swiper(".swiper-container",{
+        console.log($.cookie("userToken"))
+        let userTokenCookie = $.cookie("userToken");
+        if(userTokenCookie==null){
+            $("#header .util .logoutUtilBox").addClass("login");
+            $("#header .util .loginUtilBox").removeClass("login");
+        }
+        
+        new Swiper("#mainVisual",{
             loop:true,
-        });
-
-        new Swiper(".mainProjectList .swiper-container",{
-            loop:true,
-            slidesPerView : 3,
             autoplay:true,
         });
+
+        new Swiper("#recommendProject .swiper-container",{
+            loop:true,
+            slidesPerView:3,
+            autoplay:true,
+        });
+
+        $("#header .util .logoutUtilBox button").on("click",()=>{
+            console.log("클릭")
+            $.cookie("userToken",null)
+            console.log($.cookie("userToken"))
+        })
+
     </script>
 </body>
 </html>

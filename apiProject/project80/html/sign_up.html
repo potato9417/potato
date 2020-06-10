@@ -8,67 +8,82 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/common.css">
     <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="../css/loginAndJoin.css">
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://code.jquery.com/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
     <script src="../js/custom_axios.js"></script>
 </head>
 <body>
-    <div class="container">
-    	<header id="header">
-    	    <h1 id="logo">
-    	        <a href="./main.html">로고이미지</a>
-    	    </h1>
-    	    <nav id="gnb">
-    	        <h2>global navigation</h2>
-    	        <ul>
-    	            <li>개요</li>
-    	            <li>프로젝트</li>
-    	            <li>마이페이지</li>
-    	        </ul>
-    	    </nav>
-    	    <div class="util">
-    	        <a href="./login.html">로그인</a>
-    	        <a href="./sign_up.html">회원가입</a>
-    	    </div>
-    	    <div class="util loginOk">
-    	        <a href="./login.html">로그아웃</a>
-    	    </div>
-    	</header>
-    	<!-- header end -->
-    
-    	<section id="joinContainer">
-    	    <h2 id="title">회원가입</h2>
-    	    <form>
-    	        <p id="signUpId">아이디</p> <input id="signUpIdInput" type="text" placeholder="이메일을 입력해주세요.">
-    	        <p id="signUpNickName">닉네임</p> <input id="signUpNickNameInput" type="text" placeholder="닉네임을 입력해주세요.">
-    	        <p id="signUpPw">비밀번호</p> <input id="signUpPwInput" type="text" placeholder="비밀번호를 입력해주세요.">
-    	        <p id="signUpCheckPw">비밀번호 확인</p> <input id="signUpCheckPwInput" type="text" placeholder="비밀번호를 한번 더 입력해주세요.">
-    	    </form>
-    	    <button id="signUpBtn">회원가입</button>
-    	</section>
-    	<!-- joinContainer end -->
-    
-    	<footer id="footer">
-    	    <div class="footerLogoImg">
-    	        <img src="" alt="">
-    	    </div>
-    	    <address>
-    	        <p>E-mail : potato9417@gmail.com</p> 
-    	        <p>TEL : 010-7752-4709</p> 
-    	        <p>Copyright 2020. potato9417. All rights reserved.</p>
-    	    </address>
-    	    <div class="shareOtherSite">
-    	        <button class="kakaoShare">
-    	            <img src="" alt="">
-    	        </button>
-    	        <button class="naverShare">
-    	            <img src="" alt="">
-    	        </button>
-    	    </div>
-    	</footer>
-    	<!-- footer end -->
+    <div id="topInfo">
+        <div class="container">
+            <p class="txt">과도한 프로젝트 생성은 서버 과부화에 영향을 미칠 수 있습니다 :)</p>
+            <button class="btns mainTopGoToProject" onClick="location.href='project.html'">프로젝트 만들러가기</button>
+            <div class="closeBtn">
+                <span></span>
+                <span></span>
+            </div>
+        </div>
     </div>
+    <!-- topInfo end -->
+
+    <header id="header">
+        <div class="container">
+            <h1 id="logo">
+                <button onClick="location.href='main.html'">PROJECT80</button>
+            </h1>
+            <nav id="gnb">
+                <h2 class="hidden">global navigation</h2>
+                <ul>
+                    <li>개요</li>
+                    <li>프로젝트</li>
+                    <li>마이페이지</li>
+                </ul>
+            </nav>
+            <div class="util">
+                <button onClick="location.href='login.html'">로그인</button>
+                <button onClick="location.href='join.html'">회원가입</button>
+            </div>
+        </div>
+    </header>
+    <!-- header end -->
+    
+    <div class="container">
+        <section id="joinContainer">
+            <h2 id="title">회원가입</h2>
+            <div class="inner">
+                <form>
+                    <p id="signUpId">아이디</p> <input id="signUpIdInput" type="text" placeholder="이메일을 입력해주세요.">
+                    <p id="signUpNickName">닉네임</p> <input id="signUpNickNameInput" type="text" placeholder="닉네임을 입력해주세요.">
+                    <p id="signUpPw">비밀번호</p> <input id="signUpPwInput" type="text" placeholder="비밀번호를 입력해주세요.">
+                </form>
+                <button id="signUpBtn" class="btns">회원가입</button>
+            </div>
+        </section>
+    </div>
+    <!-- joinContainer end -->
+
+    <footer id="footer">
+        <div class="container">
+            <div class="footerLogoImg">
+                <p>PROJECT80</p>
+            </div>
+            <address class="address">
+                <p>E-mail : potato9417@gmail.com </p> 
+                <p>| Tel : 010-7752-4709</p> 
+                <p class="copyright">Copyright 2020. potato9417. All rights reserved.</p>
+            </address>
+            <div class="shareOtherSite">
+                <button class="kakaoShare">
+                    <img src="" alt="">
+                </button>
+                <button class="naverShare">
+                    <img src="" alt="">
+                </button>
+            </div>
+        </div>
+    </footer>
+    <!-- footer end -->
 
     <script>
         const signUpBtn = document.getElementById("signUpBtn"),
@@ -96,7 +111,7 @@
                         }
                     })
                     .catch((error)=>{
-                        console.log(error.response.data.message)
+                        alert(error.response.data.message);
                     })
             }
                 
