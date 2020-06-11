@@ -3,61 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project80</title>
+    <title>매일매일 습관기르기</title>
     <link rel="stylesheet" href="../css/reset.css">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Noto+Sans+KR:wght@400;500;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/common.css">
     <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="../css/project.css">
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://code.jquery.com/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
     <script src="../js/custom_axios.js"></script>
 </head>
 <body>
-    <div class="container">
         <header id="header">
-            <h1 id="logo">
-                <a href="./main.html">로고이미지</a>
-            </h1>
-            <nav id="gnb">
-                <h2>global navigation</h2>
-                <ul>
-                    <li>개요</li>
-                    <li>프로젝트</li>
-                    <li>마이페이지</li>
-                </ul>
-            </nav>
-            <div class="util">
-                <div class="loginUtilBox">
-                    <button onClick="location.href='login.html'">로그인</button>
-                    <button onClick="location.href='join.html'">회원가입</button>
-                </div>
-                <div class="logoutUtilBox">
-                    <button onClick="location.href='login.html'">로그아웃</button>
+            <div class="container">
+                <h1 id="logo">
+                    <button>HOBBY4U</button>
+                </h1>
+                <nav id="gnb">
+                    <h2 class="hidden">global navigation</h2>
+                    <ul>
+                        <li>개요</li>
+                        <li>프로젝트</li>
+                        <li>마이페이지</li>
+                    </ul>
+                </nav>
+                <div class="util">
+                    <div class="loginUtilBox">
+                        <button>로그인</button>
+                        <button>회원가입</button>
+                    </div>
+                    <div class="logoutUtilBox">
+                        <button>로그아웃</button>
+                    </div>
                 </div>
             </div>
         </header>
         <!-- header end -->
-    
+    <div class="container">
         <section id="projectDetailVisual">
-            <h2 id="title">프로젝트 상세 정보</h2>
-            <div class="container">
-                <h3>프로젝트 이름</h3>
-                <img src="" alt="">
-                <p>설명설명</p>
-                <button class="btns joinOk">가입하기</button>
+            <h2 id="title"></h2>
+            <div class="inner">
+                <div class="imgBox">
+                    <img src="" alt="">
+                    <p class="userCount"></p>
+                </div>
+                <p class="desc">설명설명</p>
+                <div class="methodBox">
+                    <p class="methodTitle">인증방법</p>
+                    <p class="method">설명설명</p>
+                </div>
+                <button id="applyButton" class="btns joinOk">가입하기</button>
             </div>
         </section>
-        <!-- projectDetailVisual end -->
+    </div>   
+    <!-- projectDetailVisual end -->
     
-        <footer id="footer">
+    <footer id="footer">
+        <div class="container">
             <div class="footerLogoImg">
-                <img src="" alt="">
+                <p>HOBBY4U</p>
             </div>
-            <address>
-                <p>E-mail : potato9417@gmail.com</p> 
-                <p>TEL : 010-7752-4709</p> 
-                <p>Copyright 2020. potato9417. All rights reserved.</p>
+            <address class="address">
+                <p>E-mail : potato9417@gmail.com </p> 
+                <p>| Tel : 010-7752-4709</p> 
+                <p class="copyright">Copyright 2020. potato9417. All rights reserved.</p>
             </address>
             <div class="shareOtherSite">
                 <button class="kakaoShare">
@@ -67,8 +77,78 @@
                     <img src="" alt="">
                 </button>
             </div>
-        </footer>
-        <!-- footer end -->
-    </div>
+        </div>
+    </footer>
+    <!-- footer end -->
+        
+    <script>
+        $("#projectDetailVisual .inner button").hover(()=>{
+            $("#projectDetailVisual .inner").toggleClass("hover")
+        })
+
+
+        let searchParams = new URLSearchParams(window.location.search),
+            projectId = searchParams.get("id");
+
+        console.log(searchParams)
+
+
+
+        axiosInstance.get(`/project/${projectId}`, {
+            params: {
+            
+            }
+        })
+            .then((res)=>{
+
+                console.log(res)
+                
+                $("#projectDetailVisual #title").text(res.data.data.project.title)
+                $("#projectDetailVisual .userCount").text(`${res.data.data.project.ongoing_users_count}명 진행중`)
+                $("#projectDetailVisual img").attr("src", res.data.data.project.img_url)
+                $("#projectDetailVisual .desc").text(res.data.data.project.description)
+                $("#projectDetailVisual .method").text(res.data.data.project.proof_method)
+
+
+                console.log("참여 인원 수 : ", res.data.data.project.ongoing_users_count)
+
+            })
+            .catch((error)=>{
+                alert(error.response.data.message)
+            })
+
+
+
+
+    </script>
+
+    <script>
+        
+        $("#applyButton").click(()=>{
+            
+
+            let searchParams = new URLSearchParams(window.location.search),
+            projectId = searchParams.get("id");
+
+            console.log($.cookie("userToken"))
+            // let token = $.cookie("userToken");
+
+        
+            const form = new FormData()
+            form.append('project_id', projectId)
+
+            console.log(form)
+            
+            axiosInstance.post(`/project`, form)
+                .then((res)=>{
+                    console.log(res)
+
+                })
+                .catch((error)=>{
+                    console.log(error)
+                })
+
+        })
+    </script>
 </body>
 </html>

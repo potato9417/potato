@@ -19,7 +19,7 @@
     <header id="header">
         <div class="container">
             <h1 id="logo">
-                <button onClick="location.href='main.html'">PROJECT80</button>
+                <button onClick="location.href='main.html'">HOBBY4U</button>
             </h1>
             <nav id="gnb">
                 <h2 class="hidden">global navigation</h2>
@@ -45,10 +45,9 @@
                     <p id="loginId">아이디</p> <input id="loginIdInput" type="text" placeholder="이메일을 입력해주세요.">
                     <p id="loginPw">비밀번호</p> <input id="loginPwInput" type="text" placeholder="비밀번호를 입력해주세요.">
                 </form>
-                <button id="loginBtn" >로그인
-                    onClick="location.href='main.html'"
+                <button id="loginBtn" class="btns">로그인
                 </button>
-                <button id="signUpBtn" onClick="location.href='sign_up.html'" class="btns">회원가입</button>
+                <button id="signUpBtn" class="btns">회원가입</button>
             </div>
         </section>
     </div>
@@ -57,7 +56,7 @@
     <footer id="footer">
         <div class="container">
             <div class="footerLogoImg">
-                <p>PROJECT80</p>
+                <p>HOBBY4U</p>
             </div>
             <address class="address">
                 <p>E-mail : potato9417@gmail.com </p> 
@@ -83,7 +82,9 @@
             loginPw = document.getElementById("loginPwInput");
 
         console.log(document.cookie)
-
+        $("#signUpBtn").click(()=>{
+            location.href="./sign_up.html";
+        })
         loginBtn.addEventListener("click",()=>{
             let id = loginId.value,
                 pw = loginPw.value;
@@ -104,7 +105,7 @@
 
 
                         // console.log(res.data.data.user.nick_name)
-                        // location.href="./main.html";
+                        location.href="./main.html";
 
 
                     }

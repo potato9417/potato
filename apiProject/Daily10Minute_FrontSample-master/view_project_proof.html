@@ -16,7 +16,6 @@
         <ul id='proofList'>
             
         </ul>
-        
 
         <script>
             
@@ -37,10 +36,10 @@
 
                 //  서버에서 해당 날짜로 인증내역 불러오기.
                 // 프로젝트 상세조회 API 호출 => /project/1  와 같이 주소에 id를 이어붙이자.
-                // 인증 목록을 보고싶은 날짜를 파라미터로 추가 : ?proof_date=2020-06-09
-                axiosInstance.get(`/project/${projectId}?proof_date=${proofDate}`, {
+                // 인증 목록을 보고싶은 날짜를 파라미터로 추가 => params 활용 첨부
+                axiosInstance.get(`/project/${projectId}`, {
                     params: {
-                        // project에선 아직 첨부할 자료가 없어서 비워둔다
+                        'proof_date': proofDate
                     }
                 })
                 .then(function (res) {
@@ -48,11 +47,17 @@
 
                     res.data.data.project.proofs.forEach(proof => {
 
-                        let count = proof.like_count
-                        let buttonTitle = "좋아요"
+                        console.log(proof)
+
+                        // 좋아요 갯수 / 취소여부 문구 설정
+                        let likeCount = proof.like_count
+                        let likeButtonTitle = "좋아요"
+
+                        // 댓글 갯수로 댓글버튼 문구 생성
+                        let replyBtnTitle = `댓글 : ${proof.reply_count}`
 
                         if (proof.my_like) {
-                            buttonTitle = "좋아요 취소"
+                            likeButtonTitle = "좋아요 취소"
                         }
 
                         if (proof.images.length > 0) {
@@ -60,8 +65,9 @@
                                                         <div>
                                                             <img class="projectListItem" src=${proof.images[0].img_url}>
                                                             ${proof.content}
-                                                            <button class='likeBtn'>${buttonTitle}</button>
-                                                            <span class='likeCount'>${count}개</span>
+                                                            <button class='likeBtn'>${likeButtonTitle}</button>
+                                                            <span class='likeCount'>${likeCount}개</span>
+                                                            <button class='replyBtn'>${replyBtnTitle}</button>
                                                         </div>
                                                     </li>`)
                         }
@@ -69,14 +75,28 @@
                             $('#proofList').append(`<li proof_id=${proof.id}>
                                                         <div>
                                                             ${proof.content}
-                                                            <button class='likeBtn'>${buttonTitle}</button>
-                                                            <span class='likeCount'>${count}개</span>
+                                                            <button class='likeBtn'>${likeButtonTitle}</button>
+                                                            <span class='likeCount'>${likeCount}개</span>
+                                                            <button class='replyBtn'>${replyBtnTitle}</button>
                                                         </div>
                                                     </li>`)
                         }
                         
                     });
 
+                    // 각각의 댓글버튼에 대한 이벤트를 일괄처리. => class 기반 이벤트
+                    $('.replyBtn').click(function() {
+                        
+                        // 어떤 인증글을 상세히 보러 이동할건지 id를 추출
+                        // 눌린 버튼의 조상중 li를 찾고, 그 속성중 proof_id 에 적힌 값 추출
+                        let proofId = $(this).parents('li').attr('proof_id')
+                        console.log('눌린 버튼의 인증글id : ', proofId)
+
+                        // 해당 인증글 상세보기 화면으로 이동.
+                        // query파라미터로 몇번글인지 전달.
+                        $(location).attr('href', `view_proof.html?proof_id=${proofId}`) 
+
+                    })
 
                     $('.likeBtn').click(function() {
                         let proofId = $(this).parents('li').attr('proof_id')
@@ -131,6 +151,24 @@
 
 
             }) 
+
+
+            // 날짜 변경 이벤트가 세팅 되고 나면
+            // 오늘 날짜를 yyyy-MM-dd 양식으로 받아와서
+
+            let now = new Date()
+            let year = now.getFullYear()
+            let month = String(now.getMonth()+1).padStart(2, '0')
+            let day = String(now.getDate()).padStart(2, '0')
+
+            let today = `${year}-${month}-${day}`
+            console.log('오늘날짜 : ', today)
+
+            // $('#date') 의 값으로 세팅. => 값이 변경되니까 서버에서 로딩.
+            $('#date').val(today)
+            // 코드로 값을 수정하면 change 이벤트 발생 X. => change 이벤트 강제 실행
+            $('#date').trigger('change')
+
 
         </script>
 

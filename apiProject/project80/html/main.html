@@ -19,7 +19,7 @@
     <div id="topInfo">
             <div class="container">
                 <p class="txt">과도한 프로젝트 생성은 서버 과부화에 영향을 미칠 수 있습니다 :)</p>
-                <button class="btns mainTopGoToProject" onClick="location.href='project.html'">프로젝트 만들러가기</button>
+                <button class="btns mainTopGoToProject">프로젝트 만들러가기</button>
                 <div class="closeBtn">
                     <span></span>
                     <span></span>
@@ -31,7 +31,7 @@
     <header id="header">
         <div class="container">
             <h1 id="logo">
-                <button onClick="location.href='main.html'">PROJECT80</button>
+                <button>HOBBY4U</button>
             </h1>
             <nav id="gnb">
                 <h2 class="hidden">global navigation</h2>
@@ -43,11 +43,11 @@
             </nav>
             <div class="util">
                 <div class="loginUtilBox">
-                    <button onClick="location.href='login.html'">로그인</button>
-                    <button onClick="location.href='join.html'">회원가입</button>
+                    <button>로그인</button>
+                    <button>회원가입</button>
                 </div>
                 <div class="logoutUtilBox">
-                    <button  onClick="location.href='login.html'">로그아웃</button>
+                    <button >로그아웃</button>
                 </div>
             </div>
         </div>
@@ -82,7 +82,7 @@
                 <ul class="swiper-wrapper">
                 </ul>
             </div>
-            <button class="pageChangeBtn" onClick="location.href='mypage.html'">더 보기</button>
+            <button class="pageChangeBtn">더 보기</button>
         </section>
         <!-- doingProject end -->
     
@@ -93,7 +93,7 @@
 
                 </ul>
             </div>
-            <button class="pageChangeBtn" onClick="location.href='project.html'">더 보기</button>
+            <button class="pageChangeBtn">더 보기</button>
         </section>
         <!-- recommendProject end -->
     
@@ -104,7 +104,7 @@
                    
                 </ul>
             </div>
-            <button class="pageChangeBtn" onClick="location.href='project.html'">더 보기</button>
+            <button class="pageChangeBtn">더 보기</button>
         </section>
         <!-- newProject end -->
     </div>
@@ -112,7 +112,7 @@
     <footer id="footer">
         <div class="container">
             <div class="footerLogoImg">
-                <p>PROJECT80</p>
+                <p>HOBBY4U</p>
             </div>
             <address class="address">
                 <p>E-mail : potato9417@gmail.com </p> 
@@ -214,6 +214,16 @@
             console.log("클릭")
             $.cookie("userToken",null)
             console.log($.cookie("userToken"))
+        })
+        
+        $("#myProject button").click(()=>{
+            location.href="./project.html";
+        })
+        $("#recommendProject button").click(()=>{
+            location.href="./project.html";
+        })
+        $("#newProject button").click(()=>{
+            location.href="./project.html";
         })
 
     </script>

@@ -80,8 +80,13 @@
 #loginContainer .inner #loginBtn {
   margin-top: 70px;
   margin-bottom: 20px;
+  background-color: #a200bc;
 }
 
 #loginContainer .inner #signUpBtn {
   background-color: #666;
+}
+
+.util {
+  display: none;
 }

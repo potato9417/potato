@@ -20,7 +20,7 @@
     <header id="header">
         <div class="container">
             <h1 id="logo">
-                <button onClick="location.href='main.html'">PROJECT80</button>
+                <button onClick="location.href='main.html'">HOBBY4U</button>
             </h1>
             <nav id="gnb">
                 <h2 class="hidden">global navigation</h2>
@@ -58,7 +58,7 @@
     <footer id="footer">
         <div class="container">
             <div class="footerLogoImg">
-                <p>PROJECT80</p>
+                <p>HOBBY4U</p>
             </div>
             <address class="address">
                 <p>E-mail : potato9417@gmail.com </p> 
@@ -78,36 +78,47 @@
     <!-- footer end -->
 
     <script>
-        const projectPage = document.querySelector("#projectPage .inner ul")
-
-        axiosInstance.get('/project', {
+            axiosInstance.get("/project", {
                 params: {
-                    // project에선 아직 첨부할 자료가 없어서 비워둔다
                 }
             })
             .then(function (res) {
-                console.log(res)
                 res.data.data.projects.forEach(project => {
-
-                    $(projectPage).append(`
-                    <li id="${project.id}">
-                        <div class="imgBox">
-                            <img src="${project.img_url}" alt="">
-                        </div>
-                        <div class="txtBox">
-                            <p class="title">${project.title}</p>
-                            <p class="sub">${project.description}</p>
-                            <div class="methodBox">
-                                <p class="method">참여방법</p>
-                                <p class="methodTxt">${project.proof_method}</p>
+                    // console.log(project)
+                    $("#projectPage ul").append(`
+                        <li id="${project.id}">
+                            <div class="imgBox">
+                                <img src="${project.img_url}" alt="">
                             </div>
-                        </div>
-                        <button class="btns main goToProject" onClick="location.href='project_detail.html'">참여하기</button>
-                    </li>
+                            <div class="txtBox">
+                                <p class="title">${project.title}</p>
+                                <p class="sub">${project.description}</p>
+                                
+                            </div>
+                            <button class="btns main goToProject">참여하기</button>
+                        </li>
                     `)
                 });
-                            
+
+
+                $("#projectPage li").click(function() {
+
+                    console.log($(this))
+                    let projectId = $(this).attr("id")
+
+                    $(location).attr("href", `project_detail.html?id=${projectId}`)
+
+                })
+
             })
+            .catch(function (error) {
+                // 실패시 error의 응답에 담긴 message를 얼럿으로
+                alert(error.response.data.message)
+            })
+
+
+
+        
     </script>
 
 </body>

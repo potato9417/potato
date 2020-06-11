@@ -307,3 +307,7 @@ body {
 button {
   cursor: pointer;
 }
+
+.util {
+  display: none;
+}
