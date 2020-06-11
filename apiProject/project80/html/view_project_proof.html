@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>매일매일 습관기르기</title>
+    <link rel="stylesheet" href="../css/reset.css">
+    <link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Noto+Sans+KR:wght@400;500;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="../css/projectProof.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://code.jquery.com/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <script src="../js/custom_axios.js"></script>
+</head>
+<body>
+    <header id="header">
+        <div class="container">
+            <h1 id="logo">
+                <button>HOBBY4U</button>
+            </h1>
+            <nav id="gnb">
+                <h2 class="hidden">global navigation</h2>
+                <ul>
+                    <li class="depth01">개요</li>
+                    <li class="depth02">프로젝트</li>
+                    <li class="depth03">마이페이지</li>
+                </ul>
+            </nav>
+            <div class="util">
+                <div class="loginUtilBox">
+                    <button class="login">로그인</button>
+                    <button class="signUp">회원가입</button>
+                </div>
+                <div class="logoutUtilBox">
+                    <button >로그아웃</button>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- header end -->
+
+    
+    <div class="container">
+        <section id="projectDetailVisual">
+            <h2 id="title">참여자 인증내역</h2>
+            <div class="inner">
+                <p>인증확인 날짜</p>
+                <input type="date" name="" id="checkDate">
+                <ul id="proofList">
+                    
+                </ul>
+            </div>
+        </section>
+    </div>   
+    <!-- projectDetailVisual end -->
+    
+    <footer id="footer">
+        <div class="container">
+            <div class="footerLogoImg">
+                <p>HOBBY4U</p>
+            </div>
+            <address class="address">
+                <p>E-mail : potato9417@gmail.com </p> 
+                <p>| Tel : 010-7752-4709</p> 
+                <p class="copyright">Copyright 2020. potato9417. All rights reserved.</p>
+            </address>
+            <div class="shareOtherSite">
+                <button class="kakaoShare">
+                    <img src="" alt="">
+                </button>
+                <button class="naverShare">
+                    <img src="" alt="">
+                </button>
+            </div>
+        </div>
+    </footer>
+    <!-- footer end -->
+    
+    
+    <script>
+        let searchParams = new URLSearchParams(window.location.search),
+            projectId = searchParams.get("project_id");
+
+        $("#checkDate").change(()=>{
+            
+            console.log($(this.target).val())
+            let proofDate = $(this).val();
+
+            $("#proofList li").remove();
+
+            axiosInstance.get(`/project/${projectId}`, {
+                    params: {
+                        "proof_date": proofDate
+                    }
+                })
+                .then((res)=>{
+                    res.data.data.project.proofs.forEach((proof)=>{
+                        console.log(proof)
+
+                        let likeCount = proof.like_count,
+                            likeButtonTitle = "좋아요",
+                            replyBtnTitle = `댓글 : ${proof.reply_count}`;
+
+                        if (proof.my_like) {
+                            likeButtonTitle = "좋아요 취소"
+                        }
+
+                        if (proof.images.length > 0) {
+                            $("#proofList").append(`
+                                <li proof_id=${proof.id}>
+                                    <div>
+                                        <img class="projectListItem" src=${proof.images[0].img_url}>
+                                        ${proof.content}
+                                        <button class="likeBtn">${likeButtonTitle}</button>
+                                        <span class="likeCount">${likeCount}개</span>
+                                        <button class="replyBtn">${replyBtnTitle}</button>
+                                    </div>
+                                </li>
+                            `)
+                        }
+                        else {$("#proofList").append(`
+                                <li proof_id=${proof.id}>
+                                    <div>
+                                        ${proof.content}
+                                        <button class="likeBtn">${likeButtonTitle}</button>
+                                        <span class="likeCount">${likeCount}개</span>
+                                        <button class="replyBtn">${replyBtnTitle}</button>
+                                    </div>
+                                </li>
+                            `)
+                        }
+
+                        $(".replyBtn").click(()=>{
+                            let proofId = $(this).parents("li").attr("proof_id");
+                            console.log("눌린 버튼의 인증글id : ", proofId);
+
+                            $(location).attr("herf",`view_proof.html?proof_id=${proofId}`);
+                        })
+
+                        $(".likeBtn").click(()=>{
+                            let proofId = $(this).parents("li").attr("proof_id");
+
+                            const form = new FormData();
+                            form.append("proof_id", proofId);
+
+                            axiosInstance.post("/like_proof", form)
+                                .then(function (res) {
+                                    alert(res.data.message);
+                                    let count = res.data.data.like.like_count,
+                                        buttonTitle = "좋아요";
+
+                                    if (res.data.data.like.my_like) {
+                                        buttonTitle = "좋아요 취소"
+                                    }
+
+                                    $(this).text(buttonTitle)
+                                    $(this).siblings(".likeCount").text(`${count}개`)
+
+                                })
+                                .catch(function (error) {
+                                    alert(error.response.data.message)
+                                })
+
+                        })
+
+                        
+
+                    })
+                })
+
+            let now = new Date(),
+                year = now.getFullYear(),
+                month = String(now.getMonth()+1).padStart(2, "0"),
+                day = String(now.getDate()).padStart(2, "0"),
+
+                today = `${year}-${month}-${day}`;
+            console.log("날짜 :", today)
+
+        })
+
+    </script>
+
+    <script>
+
+        $("#header .util .logoutUtilBox button").on("click",()=>{
+            let token = ""
+            $.cookie("userToken", token);
+
+            let userTokenCookie = $.cookie("userToken");
+            if(userTokenCookie==""){
+                $("#header .util").addClass("login");
+                console.log("로그아웃누름")
+                console.log($.cookie("userToken"))
+            }
+            else {
+                $("#header .util .logoutUtilBox").removeClass("login");
+                console.log("로그인함")
+                console.log($.cookie("userToken"))
+            }
+        })
+
+        $("#header #logo").on("click",()=>{
+            location.href="./main.html";
+        })
+
+
+        $("#header .util .loginUtilBox .login").on("click",()=>{
+            location.href="./login.html";
+        })
+
+        $("#header .util .loginUtilBox .signUp").on("click",()=>{
+            location.href="./sign_up.html";
+        })
+
+        $("#header #gnb .depth01").on("click",()=>{
+            location.href="./intro.html";
+        })
+        $("#header #gnb .depth02").on("click",()=>{
+            location.href="./project.html";
+        })
+        $("#header #gnb .depth03").on("click",()=>{
+            location.href="./myPage.html";
+        })
+
+    </script>
+</body>
+</html>

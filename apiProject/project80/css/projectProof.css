@@ -1,16 +1,16 @@
-#userContainer {
+#projectDetailVisual {
   height: 100%;
   padding: 106px 0;
   text-align: center;
 }
 
-#userContainer #title {
+#projectDetailVisual #title {
   margin-bottom: 105px;
   font-size: 4rem;
   font-weight: 700;
 }
 
-#userContainer .inner ul .userListItem {
+#projectDetailVisual .inner ul .userListItem {
   width: 20%;
   display: inline-block;
   margin: 20px 1%;
@@ -20,7 +20,7 @@
   color: #fff;
 }
 
-#userContainer .inner ul .userListItem .imgBox {
+#projectDetailVisual .inner ul .userListItem .imgBox {
   width: 200px;
   height: 200px;
   margin: auto;
@@ -30,16 +30,16 @@
   border: 10px solid #fff;
 }
 
-#userContainer .inner ul .userListItem .imgBox img {
+#projectDetailVisual .inner ul .userListItem .imgBox img {
   height: 100%;
 }
 
-#userContainer .inner ul .userListItem .userName {
+#projectDetailVisual .inner ul .userListItem .userName {
   margin-top: 20px;
   font-size: 2rem;
   font-weight: 700;
 }
 
-#userContainer .inner ul .userListItem p {
+#projectDetailVisual .inner ul .userListItem p {
   font-size: 1.4rem;
 }
