@@ -138,12 +138,24 @@ body {
   right: 0px;
 }
 
+#header .container .util .loginUtilBox {
+  display: none;
+}
+
 #header .container .util button {
   border: none;
   outline: none;
   background-color: transparent;
   font-weight: 700;
   cursor: pointer;
+}
+
+#header .container .util.login .loginUtilBox {
+  display: block;
+}
+
+#header .container .util.login .logoutUtilBox {
+  display: none;
 }
 
 .container {
@@ -291,7 +303,7 @@ body {
   right: 0;
 }
 
-.login, .click {
+.click {
   display: none;
 }
 
@@ -306,8 +318,4 @@ body {
 
 button {
   cursor: pointer;
-}
-
-.util {
-  display: none;
 }

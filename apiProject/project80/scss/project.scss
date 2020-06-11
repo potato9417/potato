@@ -131,15 +131,42 @@
                 word-wrap: keep-all;
             }
         }
-        button {
-            width: 500px;
-            padding: 7px 0;
-            font-size: 1.6rem;
+        .btnBox {
+            text-align: center;
+            button {
+                width: 500px;
+                padding: 7px 0;
+                font-size: 1.6rem;
+                margin-bottom: 10px;
+            }
+            #proofButton {
+                pointer-events: none;
+                background-color: #666;
+            }
+            .line {
+                width: 500px;
+                margin: auto;
+                #userListBtn, #viewProofButton {
+                    width: 245.5px;
+                    display: inline-block;
+                    margin-left: 5px;
+                }
+                #userListBtn {
+                    margin-left: 0;
+                }
+            }
+            &.myProject {
+                #applyButton {
+                    pointer-events: none;
+                    background-color: #666;
+                }
+                #proofButton {
+                    pointer-events: auto;
+                    background-color: #a200bc;
+                }
+            }
+
         }
     }
 }
 
-
-.util {
-    display: none;
-}

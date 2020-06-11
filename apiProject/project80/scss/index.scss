@@ -111,6 +111,9 @@ body {
             top: 50%;
             transform: translateY(-50%);
             right: 0px;
+            .loginUtilBox {
+                display: none;
+            }
             button {
                 border: none;
                 outline: none;
@@ -118,7 +121,14 @@ body {
                 font-weight: 700;
                 cursor: pointer;
             }
-            
+            &.login {
+                .loginUtilBox { 
+                    display: block;
+                }
+                .logoutUtilBox {
+                    display: none;
+                }
+            }
         }
     }
     
@@ -269,7 +279,7 @@ body {
 
 
 
-.login,.click {
+.click {
     display: none;
 }
 .btns {
@@ -284,7 +294,3 @@ button {
     cursor: pointer;
 }
 
-
-.util {
-    display: none;
-}

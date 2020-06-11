@@ -18,3 +18,5 @@ Library : libmysql.dll
 사용자 : admin
 비번 : Gkfn10qns!123 (하루10분!123 + 첫글자 대문자)
 데이터베이스 : daily10minute
+
+

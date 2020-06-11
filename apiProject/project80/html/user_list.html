@@ -9,7 +9,7 @@
     <link rel="import" href="main.html">
     <link rel="stylesheet" href="../css/common.css">
     <link rel="stylesheet" href="../css/index.css">
-    <link rel="stylesheet" href="../css/loginAndJoin.css">
+    <link rel="stylesheet" href="../css/userList.css">
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://code.jquery.com/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
@@ -40,16 +40,12 @@
     <!-- header end -->
     
     <div class="container">
-        <section id="loginContainer">
-            <h2 id="title">로그인</h2>
+        <section id="userContainer">
+            <h2 id="title">참여중인 사용자 명단</h2>
             <div class="inner">
-                <form>
-                    <p id="loginId">아이디</p> <input id="loginIdInput" type="text" placeholder="이메일을 입력해주세요.">
-                    <p id="loginPw">비밀번호</p> <input id="loginPwInput" type="text" placeholder="비밀번호를 입력해주세요.">
-                </form>
-                <button id="loginBtn" class="btns">로그인
-                </button>
-                <button id="signUpBtn" class="btns">회원가입</button>
+                <ul id="userList">
+
+                </ul>
             </div>
         </section>
     </div>
@@ -77,46 +73,43 @@
     </footer>
     <!-- footer end -->
 
-
     <script>
-        const loginBtn = document.getElementById("loginBtn"),
-            loginId = document.getElementById("loginIdInput"),
-            loginPw = document.getElementById("loginPwInput");
+        let searchParams = new URLSearchParams(window.location.search),
+            projectId = searchParams.get("project_id")
 
-        console.log(document.cookie)
-        $("#signUpBtn").click(()=>{
-            location.href="./sign_up.html";
+        axiosInstance.get(`/project/${projectId}`, {
+            params: {
+                "need_user_list" : true
+            }
         })
-        loginBtn.addEventListener("click",()=>{
-            let id = loginId.value,
-                pw = loginPw.value;
+            .then(function (res) {
+                res.data.data.project.ongoing_users.forEach(user => {
+                    
+                    console.log("참여자 : ", user)
 
-            console.log(id,pw)
-            const form = new FormData();
-            form.append("email",id);
-            form.append("password",pw);
-            axiosInstance.post("/user",form)
-                .then((res)=>{
-                    if(res.data.code==200){
-                        // console.log(res)
-                        let token = res.data.data.token;
+                    let userListItem = $(`
+                        <li class="userListItem">
+                            <div class="imgBox">
+                                <img class="profileImg" src=${user.profile_images[0].img_url}>
+                            </div>
+                            <p class="userName">${user.nick_name}</p>
+                            <p>도전 ${user.project_days}일차</p>
+                            <p>인증 ${user.project_proof_days}일 완료</p>
+                        </li>
+                    `)
 
-                        $.cookie("userToken", token);
+                    $("#userList").append(userListItem)
 
-                        console.log($.cookie("userToken"))
+                });
+                
+            })
+            .catch(function (error) {
+                // 실패시 error의 응답에 담긴 message를 얼럿으로
+                alert(error.response.data.message)
+            })
 
-                        // console.log(res.data.data.user.nick_name)
-                        location.href="./main.html";
-
-
-                    }
-                })
-                .catch((error)=>{
-                    alert(error.response.data.message)
-                })
-
-        })
     </script>
+
 
     <script>
         $("#header .util .logoutUtilBox button").on("click",()=>{

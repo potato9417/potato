@@ -1,0 +1,46 @@
+#userContainer {
+    height: 100%;
+    padding: 106px 0;
+    text-align: center;
+    #title {
+        margin-bottom: 105px;
+        font-size: 4rem;
+        font-weight: 700;
+    }
+    .inner {
+        ul {
+            .userListItem {
+                width: 20%;
+                display: inline-block;
+                margin: 20px 1%;
+                background-color: #333;
+                border-radius: 20px;
+                padding: 20px 0;
+                color: #fff;
+                .imgBox {
+                    width: 200px;
+                    height: 200px;
+                    margin: auto;
+                    position: relative;
+                    border-radius: 100%;
+                    overflow: hidden;
+                    border: 10px solid #fff;
+                    img {
+                        height: 100%;
+                    }
+                }
+                .userName {
+                    margin-top: 20px;
+                    font-size: 2rem;
+                    font-weight: 700;
+                }
+                p {
+                    font-size: 1.4rem;
+                }
+            }
+        }
+   
+    }
+}
+
+

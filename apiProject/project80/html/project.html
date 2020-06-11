@@ -20,23 +20,23 @@
     <header id="header">
         <div class="container">
             <h1 id="logo">
-                <button onClick="location.href='main.html'">HOBBY4U</button>
+                <button>HOBBY4U</button>
             </h1>
             <nav id="gnb">
                 <h2 class="hidden">global navigation</h2>
                 <ul>
-                    <li>개요</li>
-                    <li>프로젝트</li>
-                    <li>마이페이지</li>
+                    <li class="depth01">개요</li>
+                    <li class="depth02">프로젝트</li>
+                    <li class="depth03">마이페이지</li>
                 </ul>
             </nav>
             <div class="util">
                 <div class="loginUtilBox">
-                    <button onClick="location.href='login.html'">로그인</button>
-                    <button onClick="location.href='join.html'">회원가입</button>
+                    <button class="login">로그인</button>
+                    <button class="signUp">회원가입</button>
                 </div>
                 <div class="logoutUtilBox">
-                    <button  onClick="location.href='login.html'">로그아웃</button>
+                    <button >로그아웃</button>
                 </div>
             </div>
         </div>
@@ -112,8 +112,9 @@
 
             })
             .catch(function (error) {
-                // 실패시 error의 응답에 담긴 message를 얼럿으로
                 alert(error.response.data.message)
+                
+
             })
 
 
@@ -121,5 +122,47 @@
         
     </script>
 
+    <script>
+
+        $("#header .util .logoutUtilBox button").on("click",()=>{
+            let token = ""
+            $.cookie("userToken", token);
+
+            let userTokenCookie = $.cookie("userToken");
+            if(userTokenCookie==""){
+                $("#header .util").addClass("login");
+                console.log("로그아웃누름")
+                console.log($.cookie("userToken"))
+            }
+            else {
+                $("#header .util .logoutUtilBox").removeClass("login");
+                console.log("로그인함")
+                console.log($.cookie("userToken"))
+            }
+        })
+
+        $("#header #logo").on("click",()=>{
+            location.href="./main.html";
+        })
+
+        $("#header .util .loginUtilBox .login").on("click",()=>{
+            location.href="./login.html";
+        })
+
+        $("#header .util .loginUtilBox .signUp").on("click",()=>{
+            location.href="./sign_up.html";
+        })
+
+        $("#header #gnb .depth01").on("click",()=>{
+            location.href="./intro.html";
+        })
+        $("#header #gnb .depth02").on("click",()=>{
+            location.href="./project.html";
+        })
+        $("#header #gnb .depth03").on("click",()=>{
+            location.href="./myPage.html";
+        })
+
+    </script>
 </body>
 </html>

@@ -153,12 +153,43 @@
   word-wrap: keep-all;
 }
 
-#projectDetailVisual .inner button {
+#projectDetailVisual .inner .btnBox {
+  text-align: center;
+}
+
+#projectDetailVisual .inner .btnBox button {
   width: 500px;
   padding: 7px 0;
   font-size: 1.6rem;
+  margin-bottom: 10px;
 }
 
-.util {
-  display: none;
+#projectDetailVisual .inner .btnBox #proofButton {
+  pointer-events: none;
+  background-color: #666;
+}
+
+#projectDetailVisual .inner .btnBox .line {
+  width: 500px;
+  margin: auto;
+}
+
+#projectDetailVisual .inner .btnBox .line #userListBtn, #projectDetailVisual .inner .btnBox .line #viewProofButton {
+  width: 245.5px;
+  display: inline-block;
+  margin-left: 5px;
+}
+
+#projectDetailVisual .inner .btnBox .line #userListBtn {
+  margin-left: 0;
+}
+
+#projectDetailVisual .inner .btnBox.myProject #applyButton {
+  pointer-events: none;
+  background-color: #666;
+}
+
+#projectDetailVisual .inner .btnBox.myProject #proofButton {
+  pointer-events: auto;
+  background-color: #a200bc;
 }
