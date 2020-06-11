@@ -83,102 +83,124 @@
         let searchParams = new URLSearchParams(window.location.search),
             projectId = searchParams.get("project_id");
 
-        $("#checkDate").change(()=>{
-            
-            console.log($(this.target).val())
-            let proofDate = $(this).val();
+        $("#checkDate").change(function() {
+            let proofDate = $(this).val()
 
-            $("#proofList li").remove();
-
+            $("#proofList").empty()
             axiosInstance.get(`/project/${projectId}`, {
-                    params: {
-                        "proof_date": proofDate
+                params: {
+                    "proof_date": proofDate
+                }
+            })
+            .then(function (res) {
+                res.data.data.project.proofs.forEach(proof => {
+
+                    console.log(proof)
+
+                    let likeCount = proof.like_count
+                    let likeButtonTitle = "좋아요"
+
+                    let replyBtnTitle = `댓글 : ${proof.reply_count}`
+
+                    if (proof.my_like) {
+                        likeButtonTitle = "좋아요 취소"
                     }
-                })
-                .then((res)=>{
-                    res.data.data.project.proofs.forEach((proof)=>{
-                        console.log(proof)
 
-                        let likeCount = proof.like_count,
-                            likeButtonTitle = "좋아요",
-                            replyBtnTitle = `댓글 : ${proof.reply_count}`;
-
-                        if (proof.my_like) {
-                            likeButtonTitle = "좋아요 취소"
-                        }
-
-                        if (proof.images.length > 0) {
-                            $("#proofList").append(`
-                                <li proof_id=${proof.id}>
-                                    <div>
+                    if (proof.images.length > 0) {
+                        $("#proofList").append(`
+                            <li proof_id=${proof.id}>
+                                <div class="inner">
+                                    <div class="imgBox">
                                         <img class="projectListItem" src=${proof.images[0].img_url}>
-                                        ${proof.content}
+                                        <p>${proof.content}</p>
+                                    </div>
+                                    <div class="desc">
+                                        <p>${proof.user.nick_name}</p>
                                         <button class="likeBtn">${likeButtonTitle}</button>
                                         <span class="likeCount">${likeCount}개</span>
                                         <button class="replyBtn">${replyBtnTitle}</button>
                                     </div>
-                                </li>
-                            `)
-                        }
-                        else {$("#proofList").append(`
-                                <li proof_id=${proof.id}>
-                                    <div>
-                                        ${proof.content}
-                                        <button class="likeBtn">${likeButtonTitle}</button>
-                                        <span class="likeCount">${likeCount}개</span>
-                                        <button class="replyBtn">${replyBtnTitle}</button>
-                                    </div>
-                                </li>
-                            `)
-                        }
+                                </div>
+                            </li>
+                        `)
+                    }
+                    else {
+                        $("#proofList").append(`
+                            <li proof_id=${proof.id}>
+                                <div class="inner">
+                                    <p class="content">${proof.content}</p>
+                                    <p class="nickName">${proof.user.nick_name}</p>
+                                    <button class="likeBtn">${likeButtonTitle}</button>
+                                    <span class="likeCount">${likeCount}개</span>
+                                    <button class="replyBtn">${replyBtnTitle}</button>
+                                </div>
+                            </li>
+                        `)
+                    }
+                    
+                });
+                $(".replyBtn").click(function() {
+                    let proofId = $(this).parents("li").attr("proof_id")
+                    console.log("눌린 버튼의 인증글id : ", proofId)
 
-                        $(".replyBtn").click(()=>{
-                            let proofId = $(this).parents("li").attr("proof_id");
-                            console.log("눌린 버튼의 인증글id : ", proofId);
+                    $(location).attr("href", `view_proof.html?proof_id=${proofId}`) 
 
-                            $(location).attr("herf",`view_proof.html?proof_id=${proofId}`);
-                        })
-
-                        $(".likeBtn").click(()=>{
-                            let proofId = $(this).parents("li").attr("proof_id");
-
-                            const form = new FormData();
-                            form.append("proof_id", proofId);
-
-                            axiosInstance.post("/like_proof", form)
-                                .then(function (res) {
-                                    alert(res.data.message);
-                                    let count = res.data.data.like.like_count,
-                                        buttonTitle = "좋아요";
-
-                                    if (res.data.data.like.my_like) {
-                                        buttonTitle = "좋아요 취소"
-                                    }
-
-                                    $(this).text(buttonTitle)
-                                    $(this).siblings(".likeCount").text(`${count}개`)
-
-                                })
-                                .catch(function (error) {
-                                    alert(error.response.data.message)
-                                })
-
-                        })
-
-                        
-
-                    })
                 })
 
-            let now = new Date(),
-                year = now.getFullYear(),
-                month = String(now.getMonth()+1).padStart(2, "0"),
-                day = String(now.getDate()).padStart(2, "0"),
+                $(".likeBtn").click(function() {
+                    let proofId = $(this).parents("li").attr("proof_id")
 
-                today = `${year}-${month}-${day}`;
-            console.log("날짜 :", today)
+                    const form = new FormData()
+                    form.append("proof_id", proofId)
+                    let likeBtn = $(this)
 
-        })
+                    axiosInstance.post("/like_proof", form)
+                        .then(function (res) {
+                            
+                            alert(res.data.message)
+
+
+                            let count = res.data.data.like.like_count
+
+                            let buttonTitle = "좋아요"
+                            if (res.data.data.like.my_like) {
+                                buttonTitle = "좋아요 취소"
+                            }
+
+                            likeBtn.text(buttonTitle)
+
+                            likeBtn.siblings(".likeCount").text(`${count}개`)
+
+
+
+                        })
+                        .catch(function (error) {
+                            alert(error.response.data.message)
+                        })
+                })
+                
+
+            })
+            .catch(function (error) {
+                alert(error.response.data.message)
+            })
+
+
+        }) 
+
+
+
+        let now = new Date()
+        let year = now.getFullYear()
+        let month = String(now.getMonth()+1).padStart(2, "0")
+        let day = String(now.getDate()).padStart(2, "0")
+
+        let today = `${year}-${month}-${day}`
+        console.log("오늘날짜 : ", today)
+
+        $("#date").val(today)
+        $("#date").trigger("change")
+
 
     </script>
 

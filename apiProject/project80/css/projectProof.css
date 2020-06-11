@@ -10,36 +10,17 @@
   font-weight: 700;
 }
 
-#projectDetailVisual .inner ul .userListItem {
-  width: 20%;
+#projectDetailVisual .inner li {
+  width: 30%;
   display: inline-block;
   margin: 20px 1%;
-  background-color: #666;
-  border-radius: 20px;
-  padding: 20px 0;
-  color: #fff;
 }
 
-#projectDetailVisual .inner ul .userListItem .imgBox {
-  width: 200px;
-  height: 200px;
-  margin: auto;
-  position: relative;
-  border-radius: 100%;
+#projectDetailVisual .inner li .imgBox {
+  width: 100%;
   overflow: hidden;
-  border: 10px solid #fff;
 }
 
-#projectDetailVisual .inner ul .userListItem .imgBox img {
-  height: 100%;
-}
-
-#projectDetailVisual .inner ul .userListItem .userName {
-  margin-top: 20px;
-  font-size: 2rem;
-  font-weight: 700;
-}
-
-#projectDetailVisual .inner ul .userListItem p {
-  font-size: 1.4rem;
+#projectDetailVisual .inner li .imgBox img {
+  width: 100%;
 }

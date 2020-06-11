@@ -8,8 +8,19 @@
         font-weight: 700;
     }
     .inner {
-        
+        li {
+            width: 30%;
+            display: inline-block;
+            margin: 20px 1%;
+            .imgBox {
+                width: 100%;
+                overflow: hidden;
+                img {
+                    width: 100%;
+                }
+            }
         }
+        
    
     }
 }
