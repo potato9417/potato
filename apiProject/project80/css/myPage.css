@@ -1,0 +1,40 @@
+#myPageContainer {
+  height: 100%;
+  padding: 106px 0;
+  text-align: center;
+}
+
+#myPageContainer #title {
+  margin-bottom: 95px;
+  font-size: 4rem;
+  font-weight: 700;
+}
+
+#myPageContainer .inner {
+  width: 800px;
+  margin: auto;
+  text-align: left;
+}
+
+#myPageContainer .inner .imgBox {
+  width: 300px;
+  display: inline-block;
+}
+
+#myPageContainer .inner .imgBox img {
+  width: 100%;
+}
+
+#myPageContainer .inner .txtBox {
+  vertical-align: top;
+  display: inline-block;
+}
+
+#myPageContainer .inner .txtBox #nickName {
+  font-size: 2.4rem;
+  font-weight: 500;
+}
+
+#myPageContainer .inner .txtBox #email {
+  font-size: 1.8rem;
+}

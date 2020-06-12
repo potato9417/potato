@@ -6,6 +6,7 @@
     <title>매일매일 습관기르기</title>
     <link rel="stylesheet" href="../css/reset.css">
     <link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Noto+Sans+KR:wght@400;500;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
     <link rel="stylesheet" href="../css/common.css">
     <link rel="stylesheet" href="../css/index.css">
     <link rel="stylesheet" href="../css/projectProof.css">
@@ -93,14 +94,13 @@
                 }
             })
             .then(function (res) {
+                console.log(res)
                 res.data.data.project.proofs.forEach(proof => {
 
                     console.log(proof)
 
                     let likeCount = proof.like_count
                     let likeButtonTitle = "좋아요"
-
-                    let replyBtnTitle = `댓글 : ${proof.reply_count}`
 
                     if (proof.my_like) {
                         likeButtonTitle = "좋아요 취소"
@@ -112,13 +112,15 @@
                                 <div class="inner">
                                     <div class="imgBox">
                                         <img class="projectListItem" src=${proof.images[0].img_url}>
-                                        <p>${proof.content}</p>
+                                        <button class="likeBtn">
+                                            <span class="likeCount">${likeCount}</span>
+                                            <i class="xi-heart-o"></i>
+                                        </button>
                                     </div>
                                     <div class="desc">
                                         <p>${proof.user.nick_name}</p>
-                                        <button class="likeBtn">${likeButtonTitle}</button>
-                                        <span class="likeCount">${likeCount}개</span>
-                                        <button class="replyBtn">${replyBtnTitle}</button>
+                                        <p class="content">${proof.content}</p>
+                                        
                                     </div>
                                 </div>
                             </li>
@@ -128,11 +130,19 @@
                         $("#proofList").append(`
                             <li proof_id=${proof.id}>
                                 <div class="inner">
-                                    <p class="content">${proof.content}</p>
-                                    <p class="nickName">${proof.user.nick_name}</p>
-                                    <button class="likeBtn">${likeButtonTitle}</button>
-                                    <span class="likeCount">${likeCount}개</span>
-                                    <button class="replyBtn">${replyBtnTitle}</button>
+                                    <div class="imgBox">
+                                        <img class="projectListItem" src=${"../images/no_image_png.png"}>
+                                        <button class="likeBtn">
+                                            <span class="likeCount">${likeCount}</span>
+                                            <i class="xi-heart-o"></i>
+                                        </button>
+                                    </div>
+                                    <div class="desc">
+                                        <p class="nickName">${proof.user.nick_name}</p>
+                                        <p class="content">${proof.content}</p>
+                                        
+                                    </div>
+                                    
                                 </div>
                             </li>
                         `)
@@ -156,22 +166,24 @@
 
                     axiosInstance.post("/like_proof", form)
                         .then(function (res) {
-                            
+
                             alert(res.data.message)
-
-
+                            
                             let count = res.data.data.like.like_count
 
-                            let buttonTitle = "좋아요"
+                            let buttonTitle = `
+                                <span class="likeCount">${count}</span>
+                                <i class="xi-heart-o"></i>
+                            `
+
                             if (res.data.data.like.my_like) {
-                                buttonTitle = "좋아요 취소"
+                                buttonTitle = `
+                                    <span class="likeCount">${count}</span>
+                                    <i class="xi-heart"></i>
+                                `
                             }
 
-                            likeBtn.text(buttonTitle)
-
-                            likeBtn.siblings(".likeCount").text(`${count}개`)
-
-
+                            likeBtn.html(buttonTitle)
 
                         })
                         .catch(function (error) {

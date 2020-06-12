@@ -232,22 +232,43 @@
     </script>
 
     <script>
+        
+
+        axiosInstance.get("/my_info",{
+            params:{}
+        })
+            .then((res)=>{
+
+                
+                console.log(res)
+                let token = $.cookie("userToken")
+
+                if(token==""){
+                    console.log("로그아웃중")
+                    $("#header .util").addClass("login")
+                }
+                else {
+                    console.log("로그인중")
+                    $("#header .util").removeClass("login")
+                    let nickName = res.data.data.user.nick_name;
+                    $("#header .logoutUtilBox .nickName").text(nickName);
+                }
+
+                
+
+
+            })
+            .catch((error)=>{
+                // 실패시 error의 응답에 담긴 message를 얼럿으로
+                // alert(error.response.data.message)
+            })
+
+
 
         $("#header .util .logoutUtilBox button").on("click",()=>{
-            let token = ""
-            $.cookie("userToken", token);
-
-            let userTokenCookie = $.cookie("userToken");
-            if(userTokenCookie==""){
-                $("#header .util").addClass("login");
-                console.log("로그아웃누름")
-                console.log($.cookie("userToken"))
-            }
-            else {
-                $("#header .util .logoutUtilBox").removeClass("login");
-                console.log("로그인함")
-                console.log($.cookie("userToken"))
-            }
+            $.cookie("userToken", "");
+            console.log($.cookie("userToken"))
+            location.href="./login.html";
         })
 
         $("#header #logo").on("click",()=>{
@@ -263,14 +284,18 @@
         })
 
         $("#header #gnb .depth01").on("click",()=>{
+            console.log("클릭")
             location.href="./intro.html";
         })
         $("#header #gnb .depth02").on("click",()=>{
+            console.log("클릭")
             location.href="./project.html";
         })
         $("#header #gnb .depth03").on("click",()=>{
+            console.log("클릭")
             location.href="./myPage.html";
         })
+
 
     </script>
 </body>

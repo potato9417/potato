@@ -1,10 +1,27 @@
 <script src="https://code.jquery.com/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js">
+</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+<script src="../js/custom_axios.js"></script>
 
 
 <script>
-    if ($.cookie("loginUserToken")) {
+    if ($.cookie("userToken")) {
+
+        axiosInstance.get("/my_info",{
+            params:{}
+        })
+            .then((res)=>{
+                console.log(res)
+                $(location).attr("href", "main.html");
+                
+
+            })
+            .catch((error)=>{
+                // alert(error.response.data.message)
+                $(location).attr("href", "login.html");
+            })
+
         
     }
     else {

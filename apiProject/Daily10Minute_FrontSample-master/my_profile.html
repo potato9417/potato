@@ -25,6 +25,11 @@
         </form>
         <button id='uploadProfileBtn'>프사 업로드</button>
 
+        <div>
+            <button id='changePwBtn'>비밀번호 변경하러 가기</button>
+        </div>
+        
+
         <script>
 
 
@@ -51,8 +56,9 @@
                     console.log('프사 : ', pfImg)
 
                     // 추가해줄 img 태그 => Jquery로 만든 결과를 변수로 저장
+                    // 이 사진이 몇번 사진인지도 추가 기록
                     let pfImage = $(`
-                    <img class='userProfileImg' src=${pfImg.img_url}>
+                    <img image_id=${pfImg.id} class='userProfileImg' src=${pfImg.img_url}>
                     `)
 
                     // 완성된 태그를 프사 목록 div에 추가
@@ -60,6 +66,38 @@
 
 
                 });
+
+                // 추가된 이미지들에게 이벤트 일괄 부여
+                $('.userProfileImg').click(function () {
+
+                    // 몇번 이미지를 클릭했는지?
+                    let imageId = $(this).attr('image_id')
+                    console.log(imageId)
+
+                    // 정말 사진을 지울건지? 확인
+                    let deleteOk = confirm('정말 해당 사진을 삭제하시겠습니까?')
+
+                    if (deleteOk) {
+                        // 해당 이미지를 삭제 => DELETE => GET과 유사.
+                        axiosInstance.delete('/user_profile_image', {
+                            params: {
+                                'image_id':imageId
+                            }
+                        })
+                        .then(function (res) {
+                            console.log(res)
+                            alert('프사를 삭제 했습니다.')
+                            // 화면 새로고침
+                            location.reload()
+                        })
+                        .catch(function (err) {
+                            console.log(err)
+                        })
+                    }
+
+                    
+                    
+                })
 
 
             })
@@ -71,6 +109,13 @@
         </script>
         <script>
             // 이벤트 처리 전담
+
+
+            // 비번 변경 버튼
+
+            $('#changePwBtn').click(function () {
+                $(location).attr('href', 'change_pw.html')
+            })
 
 
             // 프사 업로드 버튼
@@ -113,6 +158,8 @@
                     .then(function (res) {
                         
                         console.log(res)
+                        alert('닉네임 변경 완료')
+                        location.reload()
 
                     })
                     .catch(function (error) {
