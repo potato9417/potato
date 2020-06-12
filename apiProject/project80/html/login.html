@@ -98,7 +98,11 @@
             axiosInstance.post("/user",form)
                 .then((res)=>{
                     if(res.data.code==200){
-                        // console.log(res)
+                        console.log(res)
+
+                        let user = res.data.data.user
+                        localStorage.setItem("userInfo",JSON.stringify(user));
+
                         let token = res.data.data.token;
 
                         $.cookie("userToken", token);

@@ -52,19 +52,24 @@
                 </div>
                 <div class="txtBox">
                 	<div class="nickNameBox">
-                        <p>닉네임</p>
-                        <input type="text">
+                        <p class="title">닉네임</p>
+                        <input type="text" placeholder="변경할 닉네임을 입력하세요">
                         <button class="pwBtn btns">변경하기</button>
                     </div>
                     <div class="emailBox">
-                        <p>이메일</p>
+                        <p class="title">이메일</p>
                         <p id="email"></p>
                     </div>
                     <div class="pwBox">
-                        <p>비밀번호</p>
-                        <input type="text">
+                        <p class="title">비밀번호</p>
+                        <input type="text" placeholder="변경할 비밀번호를 입력하세요.">
                         <button class="pwBtn btns">변경하기</button>
                     </div>
+                </div>
+                <div class="myProjectList">
+                    <ul id="myProjectUl">
+
+                    </ul>
                 </div>
             </div>
         </section>
@@ -100,8 +105,11 @@
             params:{}
         })
             .then((res)=>{
-                console.log(res)
+                // console.log(res)
                 let email = res.data.data.user.email;
+                let nickName = res.data.data.user.nick_name;
+
+                $("#myPageContainer .nickNameBox input").attr("placeholder",nickName)
                 
                 $("#email").text(email);
 
@@ -117,7 +125,22 @@
     </script>
 
     <script>
-            console.log($.cookie("userToken"))
+
+        axiosInstance.get("/project",{
+            params:{}
+        })
+            .then((res)=>{
+                console.log(res)
+                res.data.data.projects.forEach(project => {
+                    console.log(project)
+                    
+                });
+            })
+
+    </script>
+
+    <script>
+            // console.log($.cookie("userToken"))
             let token = $.cookie("userToken")
 
             if(token==""){

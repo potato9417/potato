@@ -17,7 +17,7 @@
 }
 
 #myPageContainer .inner .imgBox {
-  width: 300px;
+  width: 350px;
   display: inline-block;
 }
 
@@ -28,13 +28,33 @@
 #myPageContainer .inner .txtBox {
   vertical-align: top;
   display: inline-block;
+  margin-left: 50px;
 }
 
-#myPageContainer .inner .txtBox #nickName {
-  font-size: 2.4rem;
+#myPageContainer .inner .txtBox div {
+  margin-bottom: 15px;
+}
+
+#myPageContainer .inner .txtBox div input {
+  margin-left: 20px;
+  width: 250px;
+  padding: 7px 0 7px 7px;
+  font-size: 1.6rem;
+  border: 1px solid #a200bc;
+}
+
+#myPageContainer .inner .txtBox div button {
+  margin-left: 10px;
+  padding: 9px 20px;
+}
+
+#myPageContainer .inner .txtBox .title {
+  font-size: 2rem;
   font-weight: 500;
+  margin-bottom: 5px;
 }
 
 #myPageContainer .inner .txtBox #email {
   font-size: 1.8rem;
+  margin-left: 20px;
 }
