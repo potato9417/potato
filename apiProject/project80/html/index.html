@@ -12,19 +12,25 @@
             params:{}
         })
             .then((res)=>{
-                console.log(res)
-                $(location).attr("href", "main.html");
+                console.log(res.data.data.user)
                 
 
+                let myInfoStr = JSON.stringify(res.data.data.user);
+
+                localStorage.setItem("userInfo",myInfoStr);
+
+                console.log(localStorage.getItem("userInfo"));
+                
+                $(location).attr("href", "main.html");
             })
             .catch((error)=>{
                 // alert(error.response.data.message)
-                $(location).attr("href", "login.html");
+                // $(location).attr("href", "login.html");
             })
 
         
     }
     else {
-        $(location).attr("href", "login.html");
+        // $(location).attr("href", "login.html");
     }
 </script>

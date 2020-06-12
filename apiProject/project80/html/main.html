@@ -47,6 +47,7 @@
                     <button class="signUp">회원가입</button>
                 </div>
                 <div class="logoutUtilBox">
+                    <span id="nickNameTxt"></span>
                     <button >로그아웃</button>
                 </div>
             </div>
@@ -132,7 +133,14 @@
     <!-- footer end -->
 
     <script>
-        console.log(document.cookie)
+        console.log(localStorage.getItem("userInfo"))
+
+        let loginUser = JSON.parse(localStorage.getItem("userInfo"))
+
+        console.log(loginUser.nick_name)
+
+        $("#nickNameTxt").text(`${loginUser.nick_name}`);
+
         
         const myProject = document.querySelector("#myProject ul"),
             recommendProject = document.querySelector("#recommendProject ul"),
