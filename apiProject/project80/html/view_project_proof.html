@@ -159,6 +159,7 @@
                 })
 
                 $(".likeBtn").click(function() {
+                    
                     let proofId = $(this).parents("li").attr("proof_id")
 
                     const form = new FormData()
@@ -167,21 +168,25 @@
 
                     axiosInstance.post("/like_proof", form)
                         .then(function (res) {
+                            console.log(res.data.data.like.my_like)
 
                             alert(res.data.message)
                             
                             let count = res.data.data.like.like_count
 
-                            let buttonTitle = `
-                                <span class="likeCount">${count}</span>
-                                <i class="xi-heart-o"></i>
-                            `
+                            let buttonTitle
 
                             if (res.data.data.like.my_like) {
                                 buttonTitle = `
                                     <span class="likeCount">${count}</span>
                                     <i class="xi-heart"></i>
                                 `
+                            }
+                            else {
+                                buttonTitle = `
+                                <span class="likeCount">${count}</span>
+                                <i class="xi-heart-o"></i>
+                            `
                             }
 
                             likeBtn.html(buttonTitle)
