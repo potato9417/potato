@@ -54,7 +54,6 @@
                         <input type="file" name="profile_images" id="" accept="image/*">
                     </form>
                     <button id="profileBtn" class="btns">사진 변경하기</button>
-                    
                 </div>
                 <div class="txtBox">
                 	<div class="nickNameBox">
@@ -102,32 +101,73 @@
     <!-- footer end -->
 
     <script>
+        axiosInstance.get("/my_info",{
+            params:{}
+        })
+            .then((res)=>{
+                console.log(res.data.data.user.profile_images)
+                
+                let profile_images = res.data.data.user.profile_images
+                profile_images[0]
 
-        // localStorage에 저장된 사용자 정보를 가지고 화면에 대입.
-        // 서버에서 내 정보 불러오기 X
+                let pfImage = $(`
+                    <img id=${profile_images[0].id} class='userProfileImg' src=${profile_images[0].img_url}>
+                    `)
 
-        // 저장해둔 사용자 정보 String 추출
-        let userInfoStr = localStorage.getItem('userInfo')
+                    // console.log(pfImage)
 
-        // 추출한 String => JSON으로 변환
-        let loginUser = JSON.parse(userInfoStr)
-        console.log('로그인사용자 : ', loginUser)
+                    // 완성된 태그를 프사 목록 div에 추가
+                $('#profileImagesDiv').append(pfImage)
+                    // console.log('프사 : ', pfImg)
 
-        // 프로필 사진 목록을 div에 img 태그들로 추가
+                // profile_images.forEach(pfImg => {
+                //     console.log('프사 : ', pfImg)
 
-        loginUser.profile_images.forEach(pfImg => {
-            console.log('프사 : ', pfImg)
+                //     // 추가해줄 img 태그 => Jquery로 만든 결과를 변수로 저장
+                //     // 이 사진이 몇번 사진인지도 추가 기록
+                //     let pfImage = $(`
+                //     <img id=${pfImg.id} class='userProfileImg' src=${pfImg.img_url}>
+                //     `)
 
-            // 추가해줄 img 태그 => Jquery로 만든 결과를 변수로 저장
-            // 이 사진이 몇번 사진인지도 추가 기록
-            let pfImage = $(`
-            <img id=${pfImg.id} class='userProfileImg' src=${pfImg.img_url}>
-            `)
+                //     console.log(pfImage)
 
-            // 완성된 태그를 프사 목록 div에 추가
-            $('#profileImagesDiv').append(pfImage)
-            // console.log('프사 : ', pfImg)
-        });
+                //     // 완성된 태그를 프사 목록 div에 추가
+                //     $('#profileImagesDiv').append(pfImage)
+                //     // console.log('프사 : ', pfImg)
+                // });
+            
+
+            })
+            .catch((error)=>{
+                alert(error.response.data.message)
+            })
+        // // localStorage에 저장된 사용자 정보를 가지고 화면에 대입.
+        // // 서버에서 내 정보 불러오기 X
+
+        // // 저장해둔 사용자 정보 String 추출
+        // let userInfoStr = localStorage.getItem('userInfo')
+
+        // // 추출한 String => JSON으로 변환
+        // let loginUser = JSON.parse(userInfoStr)
+        // console.log('로그인사용자 : ', loginUser)
+
+        // // 프로필 사진 목록을 div에 img 태그들로 추가
+
+        // loginUser.profile_images.forEach(pfImg => {
+        //     console.log('프사 : ', pfImg)
+
+        //     // 추가해줄 img 태그 => Jquery로 만든 결과를 변수로 저장
+        //     // 이 사진이 몇번 사진인지도 추가 기록
+        //     let pfImage = $(`
+        //     <img id=${pfImg.id} class='userProfileImg' src=${pfImg.img_url}>
+        //     `)
+
+        //     console.log(pfImage)
+
+        //     // 완성된 태그를 프사 목록 div에 추가
+        //     $('#profileImagesDiv').append(pfImage)
+        //     // console.log('프사 : ', pfImg)
+        // });
 
         
 
@@ -141,7 +181,7 @@
         $('#profileBtn').click(function () {
             // 폼데이터에는 id로 찾은 객체에서도 0번째로 명시.
             const form = new FormData($('#profileImgUploadForm')[0])
-
+            console.log(form)
             // 이 폼데이터를 서버에 put - /user_profile_image 로 전송 => axios
             axiosInstance.put('/user_profile_image', form)
                 .then(function (res) {
