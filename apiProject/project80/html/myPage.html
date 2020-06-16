@@ -24,8 +24,8 @@
             <nav id="gnb">
                 <h2 class="hidden">global navigation</h2>
                 <ul>
-                    <li class="depth01">개요</li>
-                    <li class="depth02">프로젝트</li>
+                    <li class="depth01">프로젝트</li>
+                    <li class="depth02">내 프로젝트</li>
                     <li class="depth03">마이페이지</li>
                 </ul>
             </nav>
@@ -47,8 +47,14 @@
         <section id="myPageContainer">
             <h2 id="title">마이페이지</h2>
             <div class="inner">
-                <div class="imgBox">
-                    <img src="" alt="" id="profileImg">
+                <div class="profileImgBox">
+                    <div id="profileImagesDiv">
+                    </div>
+                    <form id="profileImgUploadForm">
+                        <input type="file" name="profile_images" id="" accept="image/*">
+                    </form>
+                    <button id="profileBtn" class="btns">사진 변경하기</button>
+                    
                 </div>
                 <div class="txtBox">
                 	<div class="nickNameBox">
@@ -62,14 +68,11 @@
                     </div>
                     <div class="pwBox">
                         <p class="title">비밀번호</p>
-                        <input type="text" placeholder="변경할 비밀번호를 입력하세요.">
+                        <input type="text" placeholder="기존 비밀번호를 입력하세요." id="pwInput"><br>
+                        <input type="text" placeholder="변경할 비밀번호를 입력하세요." id="newPwInput"><br>
+                        <input type="text" placeholder="한번 더 입력하세요." id="newPwConfirmInput">
                         <button class="pwBtn btns">변경하기</button>
                     </div>
-                </div>
-                <div class="myProjectList">
-                    <ul id="myProjectUl">
-
-                    </ul>
                 </div>
             </div>
         </section>
@@ -98,14 +101,110 @@
     </footer>
     <!-- footer end -->
 
-
     <script>
 
+        // localStorage에 저장된 사용자 정보를 가지고 화면에 대입.
+        // 서버에서 내 정보 불러오기 X
+
+        // 저장해둔 사용자 정보 String 추출
+        let userInfoStr = localStorage.getItem('userInfo')
+
+        // 추출한 String => JSON으로 변환
+        let loginUser = JSON.parse(userInfoStr)
+        console.log('로그인사용자 : ', loginUser)
+
+        // 프로필 사진 목록을 div에 img 태그들로 추가
+
+        loginUser.profile_images.forEach(pfImg => {
+            console.log('프사 : ', pfImg)
+
+            // 추가해줄 img 태그 => Jquery로 만든 결과를 변수로 저장
+            // 이 사진이 몇번 사진인지도 추가 기록
+            let pfImage = $(`
+            <img id=${pfImg.id} class='userProfileImg' src=${pfImg.img_url}>
+            `)
+
+            // 완성된 태그를 프사 목록 div에 추가
+            $('#profileImagesDiv').append(pfImage)
+            // console.log('프사 : ', pfImg)
+        });
+
+        
+
+
+    </script>
+    <script>
+      
+
+
+        // 프사 업로드 버튼
+        $('#profileBtn').click(function () {
+            // 폼데이터에는 id로 찾은 객체에서도 0번째로 명시.
+            const form = new FormData($('#profileImgUploadForm')[0])
+
+            // 이 폼데이터를 서버에 put - /user_profile_image 로 전송 => axios
+            axiosInstance.put('/user_profile_image', form)
+                .then(function (res) {
+                    
+                    console.log(res)
+
+                })
+                .catch(function (error) {
+                    // 실패시 error의 응답에 담긴 message를 얼럿으로
+                    alert(error.response.data.message)
+                })
+        })
+
+        
+
+    </script>
+
+
+
+
+
+    <!-- <script>
+        let userInfoStr = localStorage.getItem("userInfo"),
+            loginUser = JSON.parse(userInfoStr);
+
+        console.log(loginUser.profile_images)
+
+        
+        loginUser.profile_images.forEach(image=>{
+            console.log(image)
+
+            let profileImg = $(`
+                <img image_id=${image.id} class="userProfileImg" src=${image.img_url}>
+            `)
+
+            console.log(profileImg)
+
+            $("#myPageContainer .profileImgBox .imgBox").append(profileImg)
+        })
+
+        $("#profileBtn").click(function(){
+            const form = new FormData($("#profileImgUploadForm")[0])
+            console.log(form)
+
+            axiosInstance.put("/user_profile_image",form)
+                .then(res=>{
+                    console.log(res)
+                })
+                .catch(err=>{
+                    alert(err.response.data.message)
+                })
+        })
+
+
+    </script> -->
+
+
+    <script>
         axiosInstance.get("/my_info",{
             params:{}
         })
             .then((res)=>{
-                // console.log(res)
+                console.log(res)
                 let email = res.data.data.user.email;
                 let nickName = res.data.data.user.nick_name;
 
@@ -113,9 +212,7 @@
                 
                 $("#email").text(email);
 
-                let profileImg = res.data.data.user.profile_images[0].img_url;
-                console.log(profileImg)
-                $("#profileImg").attr("src",profileImg)
+            
 
             })
             .catch((error)=>{
@@ -125,65 +222,71 @@
     </script>
 
     <script>
+        $(".pwBtn").click(function(){
+            let pw = $("#pwInput").val(),
+                newPw = $("#newPwInput").val(),
+                newPwConfirm = $("#newPwConfirmInput").val();
 
-        axiosInstance.get("/project",{
-            params:{}
+            // console.log(pw+"=="+pwConfirm)
+            if(newPw.length==0 || newPwConfirm.length==0 || pw.length==0){
+                alert("비밀번호를 입력해주세요.")
+            }
+            else if(pw==newPw || pw==newPwConfirm) {
+                alert("기존 비밀번호와 변경할 비밀번호가 같습니다.")
+            }
+            else if(newPw!=newPwConfirm) {
+                alert("비밀번호가 서로 다릅니다.")
+            }
+            else if(newPw==newPwConfirm){
+                console.log("같다")
+                const form = new FormData()
+                form.append("new_password",newPw)
+                form.append("current_password",pw)
+
+                axiosInstance.patch("/user",form)
+                    .then(function(res){
+                        console.log(res)
+
+                        let token = res.data.data.token;
+
+                        $.cookie("userToken",token);
+                        alert("비밀번호가 변경되었습니다.")
+                        $(location).attr("href", "myPage.html")
+                    })
+                    .catch(function(err){
+                        alert(error.response.data.message)
+                    })
+                
+            }
+
         })
-            .then((res)=>{
-                console.log(res)
-                res.data.data.projects.forEach(project => {
-                    // console.log(project)
-                    if(project.is_my_project){
-                        $("#myProjectUl").append(`
-                            <li id="${project.id}">
-                                <div class="imgBox">
-                                    <img src="${project.img_url}">
-                                    <p class="title">${project.title}</p>
-                                </div>
-                            </li>
-                        `)
-                        
-                    }
-
-                    
-                });
-
-                $("#myProjectUl li").click(function() {
-
-                    console.log($(this))
-                    let projectId = $(this).attr("id")
-
-                    $(location).attr("href", `project_detail.html?id=${projectId}`)
-
-                })
-
-            })
 
         
-
     </script>
+    
 
     <script>
-            // console.log($.cookie("userToken"))
-            let token = $.cookie("userToken")
-
-            if(token==""){
-                console.log("로그아웃중")
-                $("#header .util").removeClass("login")
-            }
-            else {
-                console.log("로그인중")
-                $("#header .util").add("login")
-            }
+        
 
         axiosInstance.get("/my_info",{
             params:{}
         })
             .then((res)=>{
 
-                let nickName = res.data.data.user.nick_name;
+                
+                console.log(res)
+                let token = $.cookie("userToken")
 
-                $("#header .logoutUtilBox .nickName").text(nickName);
+                if(token==""){
+                    console.log("로그아웃중")
+                    $("#header .util").addClass("login")
+                }
+                else {
+                    console.log("로그인중")
+                    $("#header .util").removeClass("login")
+                    let nickName = res.data.data.user.nick_name;
+                    $("#header .logoutUtilBox .nickName").text(nickName);
+                }
 
                 
 
@@ -191,7 +294,7 @@
             })
             .catch((error)=>{
                 // 실패시 error의 응답에 담긴 message를 얼럿으로
-                alert(error.response.data.message)
+                // alert(error.response.data.message)
             })
 
 
@@ -201,7 +304,6 @@
             console.log($.cookie("userToken"))
             location.href="./login.html";
         })
-
 
         $("#header #logo").on("click",()=>{
             location.href="./main.html";
@@ -217,11 +319,11 @@
 
         $("#header #gnb .depth01").on("click",()=>{
             console.log("클릭")
-            location.href="./intro.html";
+            location.href="./project.html";
         })
         $("#header #gnb .depth02").on("click",()=>{
             console.log("클릭")
-            location.href="./project.html";
+            location.href="./myProject.html";
         })
         $("#header #gnb .depth03").on("click",()=>{
             console.log("클릭")

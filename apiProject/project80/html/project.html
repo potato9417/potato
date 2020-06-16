@@ -25,8 +25,8 @@
             <nav id="gnb">
                 <h2 class="hidden">global navigation</h2>
                 <ul>
-                    <li class="depth01">개요</li>
-                    <li class="depth02">프로젝트</li>
+                    <li class="depth01">프로젝트</li>
+                    <li class="depth02">내 프로젝트</li>
                     <li class="depth03">마이페이지</li>
                 </ul>
             </nav>
@@ -36,7 +36,8 @@
                     <button class="signUp">회원가입</button>
                 </div>
                 <div class="logoutUtilBox">
-                    <button >로그아웃</button>
+                    <p class="nickName"></p>
+                    <button class="logout">로그아웃</button>
                 </div>
             </div>
         </div>
@@ -121,17 +122,8 @@
 
         
     </script>
-
     <script>
-        let token = $.cookie("userToken")
-        if(token==""){
-            console.log("로그아웃중")
-            $("#header .util").addClass("login")
-        }
-        else {
-            console.log("로그인중")
-            $("#header .util").removeClass("login")
-        }
+        
 
         axiosInstance.get("/my_info",{
             params:{}
@@ -167,7 +159,7 @@
         $("#header .util .logoutUtilBox button").on("click",()=>{
             $.cookie("userToken", "");
             console.log($.cookie("userToken"))
-            // location.href="./login.html";
+            location.href="./login.html";
         })
 
         $("#header #logo").on("click",()=>{
@@ -184,11 +176,11 @@
 
         $("#header #gnb .depth01").on("click",()=>{
             console.log("클릭")
-            location.href="./intro.html";
+            location.href="./project.html";
         })
         $("#header #gnb .depth02").on("click",()=>{
             console.log("클릭")
-            location.href="./project.html";
+            location.href="./myProject.html";
         })
         $("#header #gnb .depth03").on("click",()=>{
             console.log("클릭")

@@ -1,0 +1,129 @@
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="css/main.css">
+        <script src="https://code.jquery.com/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+        <!-- 커스터마이징한 axiosInstace 들고있는 파일 -->
+        <script src="/custom_axios.js"></script>
+        
+    </head>
+    <body>
+        리뷰 상세 내용 조회 <br> <br> <br>
+        
+        작성자 : <span id='writer_nick'></span> <br><br>
+
+        프로젝트 : <span id='project_title'></span> <br>
+        참여 기간 : <span id='apply_date'></span> <br>
+        인증률 : <span id='proof_rate'></span><br><br>
+
+        제목 : <span id='title'></span> <br>
+        내용 : <span id='content'></span> <br>
+
+
+        <button id='likeBtn'>좋아요</button>   <span id='likeCountSpan'>?개</span>
+        
+        <script>
+
+            // 주소창 파라미터 분석기 생성
+            let searchParams = new URLSearchParams(window.location.search)
+
+            // 파라미터 중 review_id 에 적힌 값을 변수로 저장
+            let reviewId = searchParams.get('review_id')
+
+            axiosInstance.get(`/review/${reviewId}`)
+            .then(function (res) {
+                console.log(res)
+
+                let review = res.data.data.review
+
+                $('#project_title').text(review.project.title)
+                // $('#proof_rate').text(`${}%`)
+
+                // 참여기간 : 시작일 ~ 종료일
+
+                // 참가 시작 시간을 Js의 Date타입으로 변경
+                let start = new Date(review.apply.start_date)
+
+                // 시차 적용 안됨. => 한국시간과의 시차를 구해서 조정.
+                // 시차가 적용된 시간값으로 start에 새로 대입.
+                start = new Date(start.getTime() - start.getTimezoneOffset()*60*1000)
+                console.log(start)
+
+
+                let complete = new Date(review.apply.complete_date)
+                complete = new Date(complete.getTime() - complete.getTimezoneOffset()*60*1000)
+                console.log(complete)
+
+                // 완성된 시간 데이터 => yyyy-MM-dd 양식의 String으로 변경
+                let startStr = moment(start).format('YYYY-MM-DD')
+                let completeStr = moment(complete).format('YYYY-MM-DD')
+
+                // 시간을 제거한, 일자만으로 시작/완료 일 재분석 (?일만에 완료한지 계산)
+                let startDate = new Date(startStr)
+                let completeDate = new Date(completeStr)
+
+                // 날짜끼리의 뺄셈을 일단위로 계산  (오늘 포함 + 1)
+                let diffDay = (completeDate - startDate) / 1000 / 60 / 60 / 24 + 1
+                console.log(diffDay)
+
+                // 프로젝트의 완료일자 / 시작일~종료일 날짜 차이로 인증률 직접 계산
+                let proofRate = review.project.complete_days / diffDay * 100
+
+                // toFixed(1)로 소수점 한자리로.
+                $('#proof_rate').text(`${proofRate.toFixed(1)}%`)
+                
+
+                // String으로 가공된 일자 정보를 출력
+                $('#apply_date').text(`${startStr} ~ ${completeStr}`)
+
+                $('#title').text(review.title)
+                $('#writer_nick').text(review.writer.nick_name)
+                $('#content').text(review.content)
+
+                $('#likeCountSpan').text(`${review.like_count}개`)
+
+                if (review.is_my_like) {
+                    $('#likeBtn').text('좋아요 취소')
+                }
+
+            })
+
+            $('#likeBtn').click(function() {
+                // 좋아요를 눌렀다고 서버에 전달.
+
+                // 리뷰 아이디를 담아줄 FomData 생성
+                //  => 미리 주소창에서 얻어낸 리뷰 아이디 변수 활용
+                const form = new FormData()
+                form.append('review_id', reviewId)
+
+                // post => /review_like => form 을 통째로 첨부
+                axiosInstance.post('/review_like', form)
+                .then(function (res) {
+                    console.log(res)
+
+                    alert(res.data.message)
+
+                    let review = res.data.data.review
+
+                    // 갱신된 좋아요 갯수 반영
+                    $('#likeCountSpan').text(`${review.like_count}개`)
+
+                    // 좋아요 / 취소 여부 반영
+                    if (review.is_my_like) {
+                        $('#likeBtn').text('좋아요 취소')
+                    }
+                    else {
+                        $('#likeBtn').text('좋아요')
+                    }
+
+
+                })
+            })
+
+            
+        </script>
+    </body>
+</html>
+

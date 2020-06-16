@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project80</title>
+    <link rel="stylesheet" href="../css/reset.css">
+    <link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Noto+Sans+KR:wght@400;500;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="import" href="main.html">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="../css/loginAndJoin.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://code.jquery.com/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <script src="../js/custom_axios.js"></script>
+</head>
+<body>
+    <header id="header">
+        <div class="container">
+            <h1 id="logo">
+                <button>HOBBY4U</button>
+            </h1>
+            <nav id="gnb">
+                <h2 class="hidden">global navigation</h2>
+                <ul>
+                    <li class="depth01">프로젝트</li>
+                    <li class="depth02">내 프로젝트</li>
+                    <li class="depth03">마이페이지</li>
+                </ul>
+            </nav>
+            <div class="util">
+                <div class="loginUtilBox">
+                    <button class="login">로그인</button>
+                    <button class="signUp">회원가입</button>
+                </div>
+                <div class="logoutUtilBox">
+                    <p class="nickName"></p>
+                    <button class="logout">로그아웃</button>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- header end -->
+    
+
+    <div class="container">
+        <section id="proofTodayContainer">
+            <h2 id="title">인증하기</h2>
+            <div class="inner">
+                <form action="" id="proofForm">
+                    <div class="txtBox">
+                        <p class="title">인증메세지</p>
+                        <input type="text" name="content" placeholder="인증할 메세지를 입력하세요">
+                    </div>
+                    <div class="imgBox">
+                        <p class="title">인증샷 올리기</p>
+                        <input type="file" name="proof_images" id="">
+                    </div>
+                </form>
+                <button id="proofButton" class="btns">인증하기</button>
+            </div>
+        </section>
+    </div>
+    <!-- loginContainer end -->
+
+    <footer id="footer">
+        <div class="container">
+            <div class="footerLogoImg">
+                <p>HOBBY4U</p>
+            </div>
+            <address class="address">
+                <p>E-mail : potato9417@gmail.com </p> 
+                <p>| Tel : 010-7752-4709</p> 
+                <p class="copyright">Copyright 2020. potato9417. All rights reserved.</p>
+            </address>
+            <div class="shareOtherSite">
+                <button class="kakaoShare">
+                    <img src="" alt="">
+                </button>
+                <button class="naverShare">
+                    <img src="" alt="">
+                </button>
+            </div>
+        </div>
+    </footer>
+    <!-- footer end -->
+
+
+    <script>
+        $("#proofButton").click(function(){
+            const form = new FormData($("#proofForm")[0])
+            
+
+            let searchParams = new URLSearchParams(window.location.search)
+        
+            let projectId = searchParams.get("project_id")
+            console.log(projectId)
+            form.append("project_id",projectId)
+            console.log(form)
+            axiosInstance.post("/project_proof",form)
+                .then((res)=>{
+                    console.log(res)
+                    location.href = `project_detail.html?id=${projectId}`
+                })
+                .catch((err)=>{
+                    console.log(err)
+                })
+
+        })
+
+    </script>
+
+
+
+<script>
+        
+
+    axiosInstance.get("/my_info",{
+        params:{}
+    })
+        .then((res)=>{
+
+            
+            console.log(res)
+            let token = $.cookie("userToken")
+
+            if(token==""){
+                console.log("로그아웃중")
+                $("#header .util").addClass("login")
+            }
+            else {
+                console.log("로그인중")
+                $("#header .util").removeClass("login")
+                let nickName = res.data.data.user.nick_name;
+                $("#header .logoutUtilBox .nickName").text(nickName);
+            }
+
+            
+
+
+        })
+        .catch((error)=>{
+            // 실패시 error의 응답에 담긴 message를 얼럿으로
+            // alert(error.response.data.message)
+        })
+
+
+
+    $("#header .util .logoutUtilBox button").on("click",()=>{
+        $.cookie("userToken", "");
+        console.log($.cookie("userToken"))
+        location.href="./login.html";
+    })
+
+    $("#header #logo").on("click",()=>{
+        location.href="./main.html";
+    })
+
+    $("#header .util .loginUtilBox .login").on("click",()=>{
+        location.href="./login.html";
+    })
+
+    $("#header .util .loginUtilBox .signUp").on("click",()=>{
+        location.href="./sign_up.html";
+    })
+
+    $("#header #gnb .depth01").on("click",()=>{
+        console.log("클릭")
+        location.href="./project.html";
+    })
+    $("#header #gnb .depth02").on("click",()=>{
+        console.log("클릭")
+        location.href="./myProject.html";
+    })
+    $("#header #gnb .depth03").on("click",()=>{
+        console.log("클릭")
+        location.href="./myPage.html";
+    })
+
+
+</script>
+</body>
+</html>
