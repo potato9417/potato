@@ -58,8 +58,8 @@
                 <div class="txtBox">
                 	<div class="nickNameBox">
                         <p class="title">닉네임</p>
-                        <input type="text" placeholder="변경할 닉네임을 입력하세요">
-                        <button class="pwBtn btns">변경하기</button>
+                        <input id="newNickNameInput" type="text" placeholder="변경할 닉네임을 입력하세요">
+                        <button class="nickNameBtn btns">변경하기</button>
                     </div>
                     <div class="emailBox">
                         <p class="title">이메일</p>
@@ -302,6 +302,33 @@
         })
 
         
+    </script>
+
+    <script>
+        $("#myPageContainer .nickNameBox .nickNameBtn").click(function () {
+                let newNickName = $("#newNickNameInput").val()
+
+                if (newNickName=="") {
+                    alert("닉네임을 입력해주세요")
+                    return
+                }
+
+                const form = new FormData()
+                form.append("nick_name", newNickName)
+
+                axiosInstance.patch("/user", form)
+                    .then(function (res) {
+                        
+                        console.log(res)
+                        alert("닉네임 변경 완료")
+                        location.reload()
+
+                    })
+                    .catch(function (error) {
+                        alert(error.response.data.message)
+                    })
+
+            })
     </script>
     
 
