@@ -135,7 +135,11 @@ body {
   top: 50%;
   -webkit-transform: translateY(-50%);
           transform: translateY(-50%);
-  right: 0px;
+  right: 0;
+}
+
+#header .container .util .nickName {
+  display: inline-block;
 }
 
 #header .container .util .loginUtilBox {
@@ -143,6 +147,7 @@ body {
 }
 
 #header .container .util button {
+  display: inline-block;
   border: none;
   outline: none;
   background-color: transparent;
@@ -151,7 +156,7 @@ body {
 }
 
 #header .container .util.login .loginUtilBox {
-  display: block;
+  display: inline-block;
 }
 
 #header .container .util.login .logoutUtilBox {

@@ -83,7 +83,7 @@
             loginId = document.getElementById("loginIdInput"),
             loginPw = document.getElementById("loginPwInput");
 
-        console.log(document.cookie)
+        // console.log(document.cookie)
         $("#signUpBtn").click(()=>{
             location.href="./sign_up.html";
         })
@@ -123,14 +123,11 @@
     </script>
 
 <script>
-        
 
     axiosInstance.get("/my_info",{
         params:{}
     })
         .then((res)=>{
-
-            
             console.log(res)
             let token = $.cookie("userToken")
 

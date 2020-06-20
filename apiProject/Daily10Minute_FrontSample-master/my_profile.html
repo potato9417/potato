@@ -138,14 +138,9 @@
                     return
                 }
 
-                // 검사를 통과한 닉네임을 서버에 변경요청
-                // PATCH - /user 에 보내자.
-
-                // 프로필 변경 요청 데이터를 담아둘 FormData 클래스
                 const form = new FormData()
                 form.append('nick_name', newNickName)
 
-                // 커스텀 axios로 실제 프로필 변경 호출
 
                 axiosInstance.patch('/user', form)
                     .then(function (res) {
@@ -156,8 +151,8 @@
 
                     })
                     .catch(function (error) {
-                        // 실패시 error의 응답에 담긴 message를 얼럿으로
                         alert(error.response.data.message)
+                        location.href="./login.html";
                     })
 
             })

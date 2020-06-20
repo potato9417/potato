@@ -110,11 +110,15 @@ body {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            right: 0px;
+            right: 0;
+            .nickName {
+                display: inline-block;
+            }
             .loginUtilBox {
                 display: none;
             }
             button {
+                display: inline-block;
                 border: none;
                 outline: none;
                 background-color: transparent;
@@ -123,7 +127,7 @@ body {
             }
             &.login {
                 .loginUtilBox { 
-                    display: block;
+                    display: inline-block;
                 }
                 .logoutUtilBox {
                     display: none;
