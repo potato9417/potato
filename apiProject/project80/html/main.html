@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../css/swiper.min.css">
     <link rel="stylesheet" href="../css/common.css">
     <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="../css/main.css">
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://code.jquery.com/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
@@ -61,19 +62,26 @@
                 <li class="swiper-slide">
                     <div class="imgBox">
                         <img src="../images/main_programming_swiper.jpg" alt="">
+                        
                     </div>
+                    <p class="title">하루에 한번 꾸준한 습관을 만드는 방법!</p>
                 </li>   
                 <li class="swiper-slide">
                     <div class="imgBox">
                         <img src="../images/main_bycle_swper.jpg" alt="">
+                        
                     </div>
+                    <p class="title">하루에 한번 꾸준한 습관을 만드는 방법!</p>
                 </li>  
                 <li class="swiper-slide">
                     <div class="imgBox">
                         <img src="../images/main_book_swiper.jpg" alt="">
+                        
                     </div>
+                    <p class="title">하루에 한번 꾸준한 습관을 만드는 방법!</p>
                 </li>           
             </ul>
+            
         </section>
         <!-- mainVisual end -->
     
@@ -285,6 +293,8 @@
             .catch((error)=>{
                 // 실패시 error의 응답에 담긴 message를 얼럿으로
                 // alert(error.response.data.message)
+                $("#header .util").addClass("login")
+                $("#myProject").addClass("login");
             })
 
 

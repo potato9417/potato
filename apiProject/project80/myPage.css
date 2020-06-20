@@ -1,0 +1,137 @@
+#myPageContainer {
+  height: 100%;
+  padding: 138px 0;
+  text-align: center;
+}
+
+#myPageContainer #title {
+  margin-bottom: 95px;
+  font-size: 4rem;
+  font-weight: 700;
+}
+
+#myPageContainer .inner {
+  width: 800px;
+  margin: auto;
+  text-align: left;
+}
+
+#myPageContainer .inner .profileImgBox {
+  width: 350px;
+  display: inline-block;
+}
+
+#myPageContainer .inner .profileImgBox #profileImagesDiv {
+  margin-bottom: 30px;
+}
+
+#myPageContainer .inner .profileImgBox #profileImgUploadForm {
+  display: inline-block;
+}
+
+#myPageContainer .inner .profileImgBox #profileImgUploadForm input {
+  width: 230px;
+}
+
+#myPageContainer .inner .profileImgBox img {
+  width: 100%;
+}
+
+#myPageContainer .inner .txtBox {
+  vertical-align: top;
+  display: inline-block;
+  margin-left: 50px;
+}
+
+#myPageContainer .inner .txtBox div {
+  margin-bottom: 15px;
+}
+
+#myPageContainer .inner .txtBox div input {
+  margin-left: 20px;
+  width: 250px;
+  padding: 7px 0 7px 7px;
+  font-size: 1.6rem;
+  border: 1px solid #a200bc;
+}
+
+#myPageContainer .inner .txtBox div button {
+  margin-left: 10px;
+  padding: 9px 20px;
+}
+
+#myPageContainer .inner .txtBox .title {
+  font-size: 2rem;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+
+#myPageContainer .inner .txtBox #email {
+  font-size: 1.8rem;
+  margin-left: 20px;
+}
+
+#myProjectContainer {
+  height: 100%;
+  padding: 138px 0;
+  text-align: center;
+}
+
+#myProjectContainer #title {
+  margin-bottom: 95px;
+  font-size: 4rem;
+  font-weight: 700;
+}
+
+#myProjectContainer .inner {
+  width: 800px;
+  margin: auto;
+  text-align: left;
+}
+
+#myProjectContainer .inner #myProjectUl {
+  width: 100%;
+}
+
+#myProjectContainer .inner #myProjectUl li {
+  width: 100%;
+  height: 180px;
+  margin-bottom: 30px;
+  text-align: left;
+  position: relative;
+  padding: 0 20px 20px;
+}
+
+#myProjectContainer .inner #myProjectUl li:after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  display: block;
+  background-color: #d9d9d9;
+  width: 100%;
+  height: 1px;
+}
+
+#myProjectContainer .inner #myProjectUl li .imgBox {
+  display: inline-block;
+  width: 280px;
+  height: 100%;
+  overflow: hidden;
+}
+
+#myProjectContainer .inner #myProjectUl li .imgBox img {
+  width: 100%;
+}
+
+#myProjectContainer .inner #myProjectUl li .txtBox {
+  display: inline-block;
+  width: 420px;
+  padding: 0 30px;
+  vertical-align: top;
+}
+
+#myProjectContainer .inner #myProjectUl li .txtBox .title {
+  font-size: 2rem;
+  font-weight: 500;
+}

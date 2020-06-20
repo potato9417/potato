@@ -150,7 +150,9 @@
 
         })
         .catch((error)=>{
+            $("#header .util").addClass("login")
             alert(error.response.data.message)
+            
             location.href="./login.html";
         })
 

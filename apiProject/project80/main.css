@@ -1,0 +1,43 @@
+*, *:before, *:after {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+html {
+  font-size: 10px;
+}
+
+body {
+  font-size: 1.6rem;
+  font-family: "Roboto", "Noto Sans KR", sans-serif;
+  color: #333;
+  background-color: #666;
+}
+
+#mainVisual li .imgBox {
+  position: relative;
+}
+
+#mainVisual li .imgBox .title {
+  position: absolute;
+  top: 100px;
+  left: 100px;
+  z-index: 1;
+  font-size: 3rem;
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
+}
+
+.login, .click {
+  display: none !important;
+}
+
+.btns {
+  background-color: #a200bc;
+  color: #fff;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  padding: 4px 15px;
+}
